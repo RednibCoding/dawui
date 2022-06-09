@@ -52,19 +52,24 @@ abstract class Widget {
 }
 
 extension _BuildElement on Widget {
-  /// This function should not be used by the user
   Element? _buildElement(Widget? parent) {
     if (this == parent) return null;
     initState();
     childWidget = build();
     dawuiElement ??= SpanElement();
-    dawuiElement!.setAttribute(_widgetTypeKey, runtimeType.toString());
-    dawuiElement!.setAttribute(_widgetTypeId, hashCode.toString());
+    _annotateType(dawuiElement!);
     final childElement = childWidget!._buildElement(this);
     if (childElement != null) {
       dawuiElement!.children.add(childElement);
     }
     return dawuiElement!;
+  }
+}
+
+extension _AnnotateElement on Widget {
+  void _annotateType(Element element) {
+    element.setAttribute(_widgetTypeKey, runtimeType.toString());
+    element.setAttribute(_widgetTypeId, hashCode.toString());
   }
 }
 
