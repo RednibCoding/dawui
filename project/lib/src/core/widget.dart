@@ -90,6 +90,6 @@ void runApp(Widget Function(Map<String, String> args) widgetBuilder) {
   if (rootElement != null) {
     root.children = [rootElement];
   } else {
-    throw Exception("No dawui-app element found");
+    throw Exception("Error: Could not build root element.");
   }
 }
