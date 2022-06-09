@@ -24,11 +24,11 @@ import 'dart:html';
 
 import 'package:dawui/dawui.dart';
 
-class Container extends Widget {
+class SizedBox extends Widget {
   final String width;
   final String height;
   final Widget? child;
-  Container({this.width = "", this.height = "", this.child});
+  SizedBox({this.width = "", this.height = "", this.child});
 
   @override
   Widget build() {

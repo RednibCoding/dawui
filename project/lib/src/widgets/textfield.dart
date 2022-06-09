@@ -43,13 +43,22 @@ enum TextFieldType {
 }
 
 class TextField extends _TextField {
-  TextField({TextFieldType type = TextFieldType.text, String label = "", String pattern = "", String errorText = "", String width = ""})
+  TextField(
+      {TextFieldType type = TextFieldType.text,
+      String label = "",
+      String pattern = "",
+      String errorText = "",
+      String width = "",
+      void Function(Widget sender)? onChange,
+      String value = ""})
       : super(
           width: width,
           type: type,
           label: label,
           pattern: pattern,
           errorText: errorText,
+          onChange: onChange,
+          value: value,
           className: "mdl-textfield mdl-js-textfield",
         );
 }
@@ -61,8 +70,26 @@ class _TextField extends Widget {
   final String label;
   final String errorText;
   final String width;
+  void Function(Widget sender)? onChange;
+  InputElement? _inputElement;
+  String _initialValue = "";
 
-  _TextField({required this.className, required this.type, required this.label, required this.pattern, required this.errorText, required this.width});
+  String get value => _inputElement?.value ?? "";
+  set value(String value) {
+    _inputElement?.value = value;
+  }
+
+  _TextField(
+      {required this.className,
+      required this.type,
+      required this.label,
+      required this.pattern,
+      required this.errorText,
+      required this.width,
+      this.onChange,
+      String value = ""}) {
+    _initialValue = value;
+  }
 
   @override
   Widget build() {
@@ -71,14 +98,18 @@ class _TextField extends Widget {
     div.className = className;
 
     final inputId = makeUid();
-    final input = InputElement();
-    input.style.width = "100%";
-    input.className = "mdl-textfield__input";
-    input.type = type.toString().split('.').last;
-    input.id = inputId;
+    _inputElement = InputElement();
+    _inputElement!.style.width = "100%";
+    _inputElement!.className = "mdl-textfield__input";
+    _inputElement!.type = type.toString().split('.').last;
+    _inputElement!.id = inputId;
+    _inputElement!.value = _initialValue;
     if (pattern != "") {
-      input.pattern = pattern;
+      _inputElement!.pattern = pattern;
     }
+    _inputElement!.onInput.listen((e) {
+      onChange?.call(this);
+    });
 
     final label = LabelElement();
     label.className = "mdl-textfield__label";
@@ -93,7 +124,7 @@ class _TextField extends Widget {
       span.text = errorText;
     }
 
-    div.children.add(input);
+    div.children.add(_inputElement!);
     div.children.add(label);
     if (span != null) {
       div.children.add(span);

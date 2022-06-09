@@ -25,9 +25,9 @@ import '../core/mdl.dart';
 import '../core/widget.dart';
 
 class ColoredActionButton extends _Button {
-  ColoredActionButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  ColoredActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -37,9 +37,9 @@ class ColoredActionButton extends _Button {
 }
 
 class ActionButton extends _Button {
-  ActionButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  ActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -49,9 +49,9 @@ class ActionButton extends _Button {
 }
 
 class RaisedButton extends _Button {
-  RaisedButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  RaisedButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -61,9 +61,9 @@ class RaisedButton extends _Button {
 }
 
 class ColoredButton extends _Button {
-  ColoredButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  ColoredButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -73,9 +73,9 @@ class ColoredButton extends _Button {
 }
 
 class AccentButton extends _Button {
-  AccentButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  AccentButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -85,9 +85,9 @@ class AccentButton extends _Button {
 }
 
 class FlatButton extends _Button {
-  FlatButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  FlatButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -97,9 +97,9 @@ class FlatButton extends _Button {
 }
 
 class ColoredFlatButton extends _Button {
-  ColoredFlatButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  ColoredFlatButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -109,9 +109,9 @@ class ColoredFlatButton extends _Button {
 }
 
 class AccentFlatButton extends _Button {
-  AccentFlatButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  AccentFlatButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -121,9 +121,9 @@ class AccentFlatButton extends _Button {
 }
 
 class MiniActionButton extends _Button {
-  MiniActionButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  MiniActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -133,9 +133,9 @@ class MiniActionButton extends _Button {
 }
 
 class ColoredMiniActionButton extends _Button {
-  ColoredMiniActionButton({required String text, void Function()? onPressed, bool disabled = false, String width = "", String height = ""})
+  ColoredMiniActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
-          text: text,
+          child: child,
           width: width,
           height: height,
           onPressed: onPressed,
@@ -145,36 +145,60 @@ class ColoredMiniActionButton extends _Button {
 }
 
 class _Button extends Widget {
-  final String className;
-  final String text;
-  final bool disabled;
-  final String width;
-  final String height;
-  final void Function()? onPressed;
+  final Widget child;
+  String _className = "";
+  String _initialWidth = "";
+  String _initialHeight = "";
+  bool _initialDisabled = false;
+  ButtonElement? _buttonElement;
+  SpanElement? _spanElement;
+  final void Function(Widget sender)? onPressed;
 
-  _Button({required this.text, required this.className, this.onPressed, this.disabled = false, this.width = "", this.height = ""});
+  bool get disabled => _buttonElement?.disabled ?? false;
+  set disabled(bool value) => _buttonElement?.disabled = value;
+
+  String get width => _buttonElement?.style.width ?? "";
+  String get height => _buttonElement?.style.height ?? "";
+  set width(String value) {
+    _spanElement?.style.width = value;
+    _buttonElement?.style.width = value;
+  }
+
+  set height(String value) {
+    _spanElement?.style.height = value;
+    _buttonElement?.style.height = value;
+  }
+
+  _Button({required this.child, required String className, this.onPressed, bool disabled = false, String width = "", String height = ""}) {
+    _initialWidth = width;
+    _initialHeight = height;
+    _initialDisabled = disabled;
+    _className = className;
+  }
 
   @override
   Widget build() {
-    final span = SpanElement();
-    final button = ButtonElement();
-    button.text = text;
-    if (width != "") {
-      button.style.width = width;
-      span.style.width = width;
+    _spanElement = SpanElement();
+    _buttonElement = ButtonElement();
+    _buttonElement!.children.add(child.asHtmlElement());
+    if (_initialWidth != "") {
+      _buttonElement!.style.width = _initialWidth;
+      _spanElement!.style.width = _initialWidth;
     }
-    if (height != "") {
-      button.style.height = height;
-      span.style.height = height;
+    if (_initialHeight != "") {
+      _buttonElement!.style.height = _initialHeight;
+      _spanElement!.style.height = _initialHeight;
     }
-    button.type = "button";
-    button.disabled = disabled;
-    button.className = className;
-    button.onClick.listen((_) => onPressed?.call());
-    convertToMdlComponent(button);
-    span.children.add(button);
+    _buttonElement!.type = "button";
+    _buttonElement!.disabled = _initialDisabled;
+    _buttonElement!.className = _className;
+    _buttonElement!.onClick.listen((event) {
+      onPressed?.call(this);
+    });
+    convertToMdlComponent(_buttonElement!);
+    _spanElement!.children.add(_buttonElement!);
 
-    dawuiElement = span;
+    dawuiElement = _spanElement!;
     return this;
   }
 }
