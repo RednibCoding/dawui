@@ -27,7 +27,7 @@ import 'package:dawui/dawui.dart';
 class Container extends Widget {
   final String width;
   final String height;
-  final Element child;
+  final Widget child;
   Container({this.width = "", this.height = "", required this.child});
 
   @override
@@ -39,7 +39,7 @@ class Container extends Widget {
     if (height != "") {
       span.style.height = height;
     }
-    span.children.add(child);
+    span.children.add(child.asHtmlElement());
 
     dawuiElement = span;
     return this;

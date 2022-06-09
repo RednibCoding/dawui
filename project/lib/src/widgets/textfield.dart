@@ -42,7 +42,7 @@ enum TextFieldType {
   // color,
 }
 
-class TextField extends TextFieldBase {
+class TextField extends _TextField {
   TextField({TextFieldType type = TextFieldType.text, String label = "", String pattern = "", String errorText = "", String width = ""})
       : super(
           width: width,
@@ -54,7 +54,7 @@ class TextField extends TextFieldBase {
         );
 }
 
-class TextFieldBase extends Widget {
+class _TextField extends Widget {
   final TextFieldType type;
   final String className;
   final String pattern;
@@ -62,7 +62,7 @@ class TextFieldBase extends Widget {
   final String errorText;
   final String width;
 
-  TextFieldBase({required this.className, required this.type, required this.label, required this.pattern, required this.errorText, required this.width});
+  _TextField({required this.className, required this.type, required this.label, required this.pattern, required this.errorText, required this.width});
 
   @override
   Widget build() {
