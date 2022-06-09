@@ -1,6 +1,6 @@
 // MIT License
 
-// Copyright (c) 2021 RednibCoding
+// Copyright (c) 2022 RednibCoding
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,13 @@ export 'src/core/router.dart';
 export 'src/core/observable.dart';
 export 'src/core/widget.dart';
 
+export 'src/core/common.dart' show MainAxisAlignment, CrossAxisAlignment;
+
+export 'src/widgets/scaffold.dart';
+export 'src/widgets/container.dart';
+export 'src/widgets/flexible.dart';
 export 'src/widgets/button.dart';
-export 'src/widgets/text.dart';
 export 'src/widgets/textfield.dart';
 export 'src/widgets/row.dart';
+export 'src/widgets/column.dart';
+export 'src/widgets/wrap.dart';

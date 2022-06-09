@@ -22,32 +22,20 @@
 
 import 'dart:html';
 
-import 'observable.dart';
-import 'widget.dart';
+import '../core/widget.dart';
 
-class Router extends Widget {
-  final Widget Function(String) routeBuilder;
-  late final Observable<String> currentRoute;
-
-  Router({
-    required this.routeBuilder,
-    String? initialRoute,
-  }) : currentRoute = Observable<String>(initialRoute ?? window.location.hash.replaceFirst('#', '')) {
-    window.onHashChange.listen(_onHashChangeListener);
-  }
-
-  void _onHashChangeListener(_) {
-    final route = window.location.hash.replaceFirst("#", "");
-    if (route != currentRoute.value) push(route);
-  }
-
-  void push(String route) => currentRoute.value = route;
+class Flexible extends Widget {
+  final int flex;
+  final Widget child;
+  Flexible({required this.child, this.flex = 1});
 
   @override
   Widget build() {
-    window.location.hash = currentRoute.value;
-    return currentRoute.observe(
-      (currentRoute) => routeBuilder(currentRoute),
-    );
+    final span = SpanElement();
+    span.style.flexGrow = "$flex";
+    span.children.add(child.asHtmlElement());
+
+    dawuiElement = span;
+    return this;
   }
 }

@@ -1,6 +1,6 @@
 // MIT License
 
-// Copyright (c) 2021 RednibCoding
+// Copyright (c) 2022 RednibCoding
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,114 +30,61 @@ import 'mdl.dart';
 /// it is placed in a shadow DOM or frame
 late Element root;
 
-/// Flutter-like widgets for building UIs with HTML elements. Define the [build]
-/// method to create a new widget.
-/// ```dart
-/// class MyPage extends Widget {
-///   @override
-///   Element build() => paragraphElement(text: "My Awesome Page");
-/// }
-/// ```
+const String _widgetTypeKey = "widget-type";
+const String _widgetTypeId = "widget-id";
+
 abstract class Widget {
-  Widget? get parent => _parent;
-  Widget? _parent;
+  Element? dawuiElement;
+  Widget? childWidget;
 
-  /// Method which needs to be defined by the developer to describe the UI
-  /// using HTML Elements. It is **not** recommended to use this method to
-  /// append your widget in the [build] method of another widget! Use [appendTo]
-  /// for this!
-  Element build();
+  Widget build();
 
-  /// Override this method to initialize the state of this widget. The [parent]
-  /// value is already set when this method is called.
   void initState() {
     return;
   }
 
-  /// Use this method inside of the [build] method of the parent widget to
-  /// append this widget to it. This creates a widget tree and makes it possible
-  /// to use the [findParent()] method.
-  Element context(Widget parent, [Object? cacheKey]) {
-    _parent = parent;
-    initState();
-    return wrapTyped();
+  Element asHtmlElement() {
+    return _buildElement(null) ?? SpanElement();
   }
-
-  /// Looks up the widget tree until it finds a parent of this type or otherwise
-  /// throws an exception. Make sure that this widget has been appended by the
-  /// [context()] method first.
-  T findParent<T>() {
-    final parentPointer = parent;
-    if (parentPointer == null) {
-      throw Exception('Unable to find parent of type $T in widget tree. Have you appended this widget with `.build()` instead of `.appendTo(this)` maybe?');
-    }
-    if (parentPointer is T) {
-      return parentPointer as T;
-    }
-    return parentPointer.findParent<T>();
-  }
-
-  /// Checks if this widget instance is still mounted to the DOM.
-  bool get isMounted => root.querySelector('[$_dataWidgetTypeId="${hashCode.toString()}"]') != null;
 
   @override
   String toString() => build().toString();
 }
 
-const String _dataWidgetTypeKey = 'data-widget-type';
-const String _dataWidgetTypeId = 'data-widget-id';
-
-extension _WrapTyped on Widget {
-  Element wrapTyped() {
-    var element = build();
-    if (element.hasAttribute(_dataWidgetTypeKey) || element.hasAttribute(_dataWidgetTypeId)) {
-      element = SpanElement()..children.add(element);
+extension _BuildElement on Widget {
+  /// This function should not be used by the user
+  Element? _buildElement(Widget? parent) {
+    if (this == parent) return null;
+    initState();
+    childWidget = build();
+    dawuiElement ??= SpanElement();
+    dawuiElement!.setAttribute(_widgetTypeKey, runtimeType.toString());
+    dawuiElement!.setAttribute(_widgetTypeId, hashCode.toString());
+    final childElement = childWidget!._buildElement(this);
+    if (childElement != null) {
+      dawuiElement!.children.add(childElement);
     }
-    return element
-      ..setAttribute(_dataWidgetTypeKey, runtimeType.toString())
-      ..setAttribute(_dataWidgetTypeId, hashCode.toString());
+    return dawuiElement!;
   }
 }
 
 /// Creates a new app and appends it to the body element.
 /// The [args] contain all attributes of the HTML element.
 void runApp(Widget Function(Map<String, String> args) widgetBuilder) {
+  initMdl();
   final appId = "dawui-app";
   var target = document.createElement("div");
+  target.style.width = "100%";
+  target.style.height = "100%";
   target.id = appId;
   document.body?.append(target);
 
-  initMdl();
-
   root = target;
-  final rootWidget = widgetBuilder(root.dataset);
-  rootWidget.initState();
-  root.children = [rootWidget.wrapTyped()];
+  var rootWidget = widgetBuilder(root.dataset);
+  var rootElement = rootWidget._buildElement(null);
+  if (rootElement != null) {
+    root.children = [rootElement];
+  } else {
+    throw Exception("No dawui-app element found");
+  }
 }
-
-// void _appendMaterialDesignLocal() {
-//   // For reference, see: https://getmdl.io
-
-//   // Add meta viewport tag to the document so mobile devices will render correctly.
-//   final meta = MetaElement();
-//   meta.name = "viewport";
-//   meta.content = "width=device-width, initial-scale=1.0";
-//   document.head?.append(meta);
-
-//   // Append material icons (this is needed by the material library)
-//   final linkIcons = LinkElement();
-//   linkIcons.rel = "stylesheet";
-//   linkIcons.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
-
-//   // Append material css
-//   final linkCSS = LinkElement();
-//   linkCSS.rel = "stylesheet";
-//   linkCSS.href = "packages/dawui/src/mdl/material.min.css";
-//   document.head?.append(linkCSS);
-
-//   // Append material js
-//   final script = ScriptElement();
-//   script.defer = true;
-//   script.src = "packages/dawui/src/mdl/material.min.js";
-//   document.head?.append(script);
-// }

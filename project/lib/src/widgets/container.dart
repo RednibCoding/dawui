@@ -22,32 +22,26 @@
 
 import 'dart:html';
 
-import 'observable.dart';
-import 'widget.dart';
+import 'package:dawui/dawui.dart';
 
-class Router extends Widget {
-  final Widget Function(String) routeBuilder;
-  late final Observable<String> currentRoute;
-
-  Router({
-    required this.routeBuilder,
-    String? initialRoute,
-  }) : currentRoute = Observable<String>(initialRoute ?? window.location.hash.replaceFirst('#', '')) {
-    window.onHashChange.listen(_onHashChangeListener);
-  }
-
-  void _onHashChangeListener(_) {
-    final route = window.location.hash.replaceFirst("#", "");
-    if (route != currentRoute.value) push(route);
-  }
-
-  void push(String route) => currentRoute.value = route;
+class Container extends Widget {
+  final String width;
+  final String height;
+  final Element child;
+  Container({this.width = "", this.height = "", required this.child});
 
   @override
   Widget build() {
-    window.location.hash = currentRoute.value;
-    return currentRoute.observe(
-      (currentRoute) => routeBuilder(currentRoute),
-    );
+    final span = SpanElement();
+    if (width != "") {
+      span.style.width = width;
+    }
+    if (height != "") {
+      span.style.height = height;
+    }
+    span.children.add(child);
+
+    dawuiElement = span;
+    return this;
   }
 }

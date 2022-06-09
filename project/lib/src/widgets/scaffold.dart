@@ -22,32 +22,33 @@
 
 import 'dart:html';
 
-import 'observable.dart';
-import 'widget.dart';
+import 'package:dawui/dawui.dart';
 
-class Router extends Widget {
-  final Widget Function(String) routeBuilder;
-  late final Observable<String> currentRoute;
+class Scaffold extends Widget {
+  final Widget? header;
+  final Widget body;
+  final Widget? footer;
 
-  Router({
-    required this.routeBuilder,
-    String? initialRoute,
-  }) : currentRoute = Observable<String>(initialRoute ?? window.location.hash.replaceFirst('#', '')) {
-    window.onHashChange.listen(_onHashChangeListener);
-  }
-
-  void _onHashChangeListener(_) {
-    final route = window.location.hash.replaceFirst("#", "");
-    if (route != currentRoute.value) push(route);
-  }
-
-  void push(String route) => currentRoute.value = route;
+  Scaffold({required this.body, this.header, this.footer});
 
   @override
   Widget build() {
-    window.location.hash = currentRoute.value;
-    return currentRoute.observe(
-      (currentRoute) => routeBuilder(currentRoute),
-    );
+    final div = DivElement();
+    div.style.width = "100%";
+    div.style.height = "100%";
+    div.style.display = "flex";
+    div.style.flexDirection = "column";
+    div.style.justifyContent = "space-between";
+    div.style.alignItems = "stretch";
+    if (header != null) {
+      div.children.add(header!.asHtmlElement());
+    }
+    div.children.add(body.asHtmlElement());
+    if (footer != null) {
+      div.children.add(footer!.asHtmlElement());
+    }
+
+    dawuiElement = div;
+    return this;
   }
 }

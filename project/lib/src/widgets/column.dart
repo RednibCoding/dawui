@@ -22,32 +22,32 @@
 
 import 'dart:html';
 
-import 'observable.dart';
-import 'widget.dart';
+import '../core/widget.dart';
+import '../core/common.dart';
 
-class Router extends Widget {
-  final Widget Function(String) routeBuilder;
-  late final Observable<String> currentRoute;
-
-  Router({
-    required this.routeBuilder,
-    String? initialRoute,
-  }) : currentRoute = Observable<String>(initialRoute ?? window.location.hash.replaceFirst('#', '')) {
-    window.onHashChange.listen(_onHashChangeListener);
-  }
-
-  void _onHashChangeListener(_) {
-    final route = window.location.hash.replaceFirst("#", "");
-    if (route != currentRoute.value) push(route);
-  }
-
-  void push(String route) => currentRoute.value = route;
+class Column extends Widget {
+  final List<Widget> children;
+  final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
+  final bool reverse;
+  Column({required this.children, this.mainAxisAlignment = MainAxisAlignment.start, this.crossAxisAlignment = CrossAxisAlignment.center, this.reverse = false});
 
   @override
   Widget build() {
-    window.location.hash = currentRoute.value;
-    return currentRoute.observe(
-      (currentRoute) => routeBuilder(currentRoute),
-    );
+    final span = SpanElement();
+    span.style.height = "100%";
+    span.style.width = "100%";
+    span.style.display = "flex";
+    span.style.flexWrap = "nowrap";
+    span.style.flexDirection = reverse ? "column-reverse" : "column";
+    span.style.justifyContent = mainAxisAlignmentToString(mainAxisAlignment);
+    span.style.alignItems = crossAxisAlignmentToString(crossAxisAlignment);
+
+    for (final child in children) {
+      span.children.add(child.asHtmlElement());
+    }
+
+    dawuiElement = span;
+    return this;
   }
 }

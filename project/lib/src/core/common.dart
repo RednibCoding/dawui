@@ -20,34 +20,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import 'dart:html';
+enum MainAxisAlignment {
+  start,
+  end,
+  center,
+  spaceBetween,
+  spaceAround,
+  spaceEvenly,
+}
 
-import 'observable.dart';
-import 'widget.dart';
+enum CrossAxisAlignment {
+  start,
+  end,
+  center,
+  stretch,
+  baseline,
+}
 
-class Router extends Widget {
-  final Widget Function(String) routeBuilder;
-  late final Observable<String> currentRoute;
-
-  Router({
-    required this.routeBuilder,
-    String? initialRoute,
-  }) : currentRoute = Observable<String>(initialRoute ?? window.location.hash.replaceFirst('#', '')) {
-    window.onHashChange.listen(_onHashChangeListener);
+String crossAxisAlignmentToString(CrossAxisAlignment alignment) {
+  switch (alignment) {
+    case CrossAxisAlignment.start:
+      return "flex-start";
+    case CrossAxisAlignment.end:
+      return "flex-end";
+    case CrossAxisAlignment.center:
+      return "center";
+    case CrossAxisAlignment.stretch:
+      return "stretch";
+    case CrossAxisAlignment.baseline:
+      return "baseline";
   }
+}
 
-  void _onHashChangeListener(_) {
-    final route = window.location.hash.replaceFirst("#", "");
-    if (route != currentRoute.value) push(route);
-  }
-
-  void push(String route) => currentRoute.value = route;
-
-  @override
-  Widget build() {
-    window.location.hash = currentRoute.value;
-    return currentRoute.observe(
-      (currentRoute) => routeBuilder(currentRoute),
-    );
+String mainAxisAlignmentToString(MainAxisAlignment alignment) {
+  switch (alignment) {
+    case MainAxisAlignment.start:
+      return "flex-start";
+    case MainAxisAlignment.end:
+      return "flex-end";
+    case MainAxisAlignment.center:
+      return "center";
+    case MainAxisAlignment.spaceBetween:
+      return "space-between";
+    case MainAxisAlignment.spaceAround:
+      return "space-around";
+    case MainAxisAlignment.spaceEvenly:
+      return "space-evenly";
   }
 }

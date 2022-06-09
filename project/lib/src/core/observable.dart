@@ -1,6 +1,6 @@
 // MIT License
 
-// Copyright (c) 2021 RednibCoding
+// Copyright (c) 2022 RednibCoding
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import 'dart:html';
 import 'widget.dart';
 
 class Observable<T> {
   T _observable;
   T get value => _observable;
   bool get hasListener => _subscriptions.isNotEmpty;
+  final Set<_Subscription<T>> _subscriptions = {};
 
   Observable(T initialValue) : _observable = initialValue;
 
@@ -34,43 +34,29 @@ class Observable<T> {
     _observable = value;
     final subs = {..._subscriptions};
     for (final sub in subs) {
-      if (sub.element.isConnected != true) {
+      if (sub.widget.dawuiElement == null) {
         _subscriptions.remove(sub);
         continue;
       }
-      final newElement = sub.builder(value);
-      sub.element.replaceWith(newElement);
-      sub.element = newElement;
+      if (sub.widget.dawuiElement!.isConnected != true) {
+        _subscriptions.remove(sub);
+        continue;
+      }
+      final newElement = sub.builder(value).asHtmlElement();
+      sub.widget.dawuiElement!.replaceWith(newElement);
+      sub.widget.dawuiElement = newElement;
     }
   }
 
-  final Set<_Subscription<T>> _subscriptions = {};
-
-  Element observe({required Element Function(T value) builder}) {
-    final element = builder(_observable);
-    _subscriptions.add(_Subscription<T>(element, builder));
-    return element;
+  Widget observe(Widget Function(T value) builder) {
+    final widget = builder(_observable);
+    _subscriptions.add(_Subscription<T>(widget, builder));
+    return widget;
   }
 }
 
 class _Subscription<T> {
-  Element element;
-  final Element Function(T value) builder;
-
-  _Subscription(this.element, this.builder);
-}
-
-class Observer extends Widget {
-  final Map<Observable, Element Function()> _observables;
-
-  Observer({required Map<Observable, Element Function()> children}) : _observables = children;
-
-  @override
-  Element build() {
-    final element = SpanElement();
-    for (final e in _observables.entries) {
-      element.children.add(e.key.observe(builder: (value) => e.value()));
-    }
-    return element;
-  }
+  Widget widget;
+  final Widget Function(T value) builder;
+  _Subscription(this.widget, this.builder);
 }
