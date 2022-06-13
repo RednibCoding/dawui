@@ -12,16 +12,18 @@ class MainApp extends Widget {
         Row(children: [
           TabView(
             tabViewItems: [
-              TabViewItem(title: Badge("1", Text("Hello 1")), body: Center(child: Text("Hello 1"))),
-              TabViewItem(title: Badge("2", Text("Hello 2")), body: Center(child: Text("Hello 2")), isActive: true),
-              TabViewItem(title: Badge("3", Text("Hello 3")), body: Center(child: Text("Hello 3"))),
+              TabViewItem(title: Badge("1", Text("Hello 1")), body: Center(child: Chip("Hello 1"))),
+              TabViewItem(title: Badge("2", Text("Hello 2")), body: Center(child: Chip("Hello 2", isContact: true, avatarText: "H")), isActive: true),
+              TabViewItem(title: Badge("3", Text("Hello 3")), body: Center(child: Chip("Hello 3", isButton: true))),
             ],
           ),
           TabView(
             tabViewItems: [
-              TabViewItem(title: Badge("1", Text("World 1")), body: Center(child: Text("World 1"))),
-              TabViewItem(title: Badge("2", Text("World 2")), body: Center(child: Text("World 2"))),
-              TabViewItem(title: Badge("3", Text("World 3")), body: Center(child: Text("World 3")), isActive: true),
+              TabViewItem(title: Badge("1", Text("World 1")), body: Center(child: Chip("World 1", isContact: true, deleteble: true))),
+              TabViewItem(
+                  title: Badge("2", Text("World 2")),
+                  body: Center(child: Chip("World 2", deleteble: true, onDelete: (sender) => print((sender as Chip).label)))),
+              TabViewItem(title: Badge("3", Text("World 3")), body: Center(child: Chip("World 3", isButton: true, isContact: true)), isActive: true),
             ],
           ),
         ]),

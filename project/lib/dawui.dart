@@ -42,3 +42,4 @@ export 'src/widgets/wrap.dart';
 export 'src/widgets/tabview.dart';
 export 'src/widgets/tabbar.dart';
 export 'src/widgets/badge.dart';
+export 'src/widgets/chip.dart';
