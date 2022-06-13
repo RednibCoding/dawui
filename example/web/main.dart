@@ -5,6 +5,9 @@ void main() {
 }
 
 class MainApp extends Widget {
+  final sliderValue = Observable("0");
+  final slider = Slider(width: "250px");
+
   @override
   Widget build() {
     return Column(
@@ -35,6 +38,12 @@ class MainApp extends Widget {
         LoadingIndicator(isSpinner: true),
         SizedBox(height: "20px"),
         LoadingIndicator(isSpinner: true, spinnerMulticolor: true),
+        SizedBox(height: "20px"),
+        Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.baseline, children: [
+          sliderValue.observe((value) => Text("Slider value: $value")),
+          SizedBox(width: "20px"),
+          slider..onChange = (value) => sliderValue.value = value,
+        ]),
         SizedBox(height: "20px"),
       ],
     );

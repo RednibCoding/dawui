@@ -44,3 +44,4 @@ export 'src/widgets/tabbar.dart';
 export 'src/widgets/badge.dart';
 export 'src/widgets/chip.dart';
 export 'src/widgets/loading_indicator.dart';
+export 'src/widgets/slider.dart';
