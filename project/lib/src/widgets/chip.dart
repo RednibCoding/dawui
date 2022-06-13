@@ -48,7 +48,8 @@ class Chip extends Widget {
         mainElement.children.add(avatar);
       } else {
         final avatar = SpanElement();
-        avatar.className = "mdl-chip__contact";
+        // TODO: make color configurable
+        avatar.className = "mdl-chip__contact mdl-color--teal mdl-color-text--white";
         avatar.text = avatarText;
         mainElement.children.add(avatar);
       }
