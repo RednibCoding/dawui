@@ -3,11 +3,11 @@ import 'dart:html';
 import 'package:dawui/dawui.dart';
 
 class Badge extends Widget {
-  final String badge;
+  final String badgeText;
   final Widget child;
 
   Badge(
-    this.badge,
+    this.badgeText,
     this.child,
   );
 
@@ -15,7 +15,7 @@ class Badge extends Widget {
   Widget build() {
     final span = SpanElement();
     span.className = "mdl-badge";
-    span.setAttribute("data-badge", badge);
+    span.setAttribute("data-badge", badgeText);
     span.children.add(child.asHtmlElement());
 
     dawuiElement = span;
