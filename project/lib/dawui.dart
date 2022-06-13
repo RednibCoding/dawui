@@ -30,6 +30,7 @@ export 'src/core/common.dart' show MainAxisAlignment, CrossAxisAlignment;
 
 export 'src/widgets/scaffold.dart';
 export 'src/widgets/container.dart';
+export 'src/widgets/center.dart';
 export 'src/widgets/sizedbox.dart';
 export 'src/widgets/flexible.dart';
 export 'src/widgets/button.dart';
@@ -38,3 +39,6 @@ export 'src/widgets/textfield.dart';
 export 'src/widgets/row.dart';
 export 'src/widgets/column.dart';
 export 'src/widgets/wrap.dart';
+export 'src/widgets/tabview.dart';
+export 'src/widgets/tabbar.dart';
+export 'src/widgets/badge.dart';

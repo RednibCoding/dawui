@@ -32,18 +32,18 @@ class SizedBox extends Widget {
 
   @override
   Widget build() {
-    final span = SpanElement();
+    final div = DivElement();
     if (width != "") {
-      span.style.width = width;
+      div.style.width = width;
     }
     if (height != "") {
-      span.style.height = height;
+      div.style.height = height;
     }
     if (child != null) {
-      span.children.add(child!.asHtmlElement());
+      div.children.add(child!.asHtmlElement());
     }
 
-    dawuiElement = span;
+    dawuiElement = div;
     return this;
   }
 }

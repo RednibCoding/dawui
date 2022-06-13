@@ -5,48 +5,26 @@ void main() {
 }
 
 class MainApp extends Widget {
-  final counter = Observable(0);
-
   @override
   Widget build() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Both work the same
-        counter.observe((_) => Text("Counter: ${counter.value}")),
-        counter.observe((value) => Text("Counter: $value")),
-        SizedBox(height: "8px"),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ColoredButton(
-              child: counter.observe((value) => Text("Clicked $value times")),
-              onPressed: (Widget sender) {
-                counter.value += 1;
-              },
-            ),
-          ],
-        ),
-        SizedBox(height: "16px"),
-        Container(
-          width: "80%",
-          child: Row(
-            children: [
-              Flexible(
-                flex: 2,
-                child: AccentButton(child: Text("Flexible 1"), width: "100%"),
-              ),
-              Flexible(
-                flex: 1,
-                child: ColoredButton(child: Text("Flexible 2"), width: "100%"),
-              ),
-              Flexible(
-                flex: 2,
-                child: AccentButton(child: Text("Flexible 3"), width: "100%"),
-              ),
+        Row(children: [
+          TabView(
+            tabViewItems: [
+              TabViewItem(title: Badge("1", Text("Hello 1")), body: Center(child: Text("Hello 1"))),
+              TabViewItem(title: Badge("2", Text("Hello 2")), body: Center(child: Text("Hello 2")), isActive: true),
+              TabViewItem(title: Badge("3", Text("Hello 3")), body: Center(child: Text("Hello 3"))),
             ],
           ),
-        ),
+          TabView(
+            tabViewItems: [
+              TabViewItem(title: Badge("1", Text("World 1")), body: Center(child: Text("World 1"))),
+              TabViewItem(title: Badge("2", Text("World 2")), body: Center(child: Text("World 2"))),
+              TabViewItem(title: Badge("3", Text("World 3")), body: Center(child: Text("World 3")), isActive: true),
+            ],
+          ),
+        ]),
       ],
     );
   }

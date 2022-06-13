@@ -56,12 +56,15 @@ extension _BuildElement on Widget {
     if (this == parent) return null;
     initState();
     childWidget = build();
-    dawuiElement ??= SpanElement();
+    dawuiElement ??= SpanElement()
+      ..style.width = "100%"
+      ..style.height = "100%";
     _annotateType(dawuiElement!);
     final childElement = childWidget!._buildElement(this);
     if (childElement != null) {
       dawuiElement!.children.add(childElement);
     }
+
     return dawuiElement!;
   }
 }
