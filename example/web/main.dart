@@ -27,6 +27,15 @@ class MainApp extends Widget {
             ],
           ),
         ]),
+        SizedBox(height: "20px"),
+        LoadingIndicator(),
+        SizedBox(height: "20px"),
+        LoadingIndicator(width: "500px"),
+        SizedBox(height: "20px"),
+        LoadingIndicator(isSpinner: true),
+        SizedBox(height: "20px"),
+        LoadingIndicator(isSpinner: true, spinnerMulticolor: true),
+        SizedBox(height: "20px"),
       ],
     );
   }
