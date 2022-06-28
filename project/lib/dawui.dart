@@ -45,3 +45,4 @@ export 'src/widgets/badge.dart';
 export 'src/widgets/chip.dart';
 export 'src/widgets/loading_indicator.dart';
 export 'src/widgets/slider.dart';
+export 'src/widgets/stack.dart';

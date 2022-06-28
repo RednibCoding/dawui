@@ -22,27 +22,24 @@
 
 import 'dart:html';
 
-import 'package:dawui/dawui.dart';
+import '../core/widget.dart';
 
-class Text extends Widget {
-  String _initialText = "";
-  SpanElement? _spanElement;
+class Stack extends Widget {
+  final List<Widget> children;
 
-  String get value => _spanElement?.text ?? "";
-  set value(String value) {
-    _spanElement?.text = value;
-  }
-
-  Text(String text) {
-    _initialText = text;
-  }
+  Stack({required this.children});
 
   @override
   Widget build() {
-    _spanElement = SpanElement();
-    _spanElement!.text = _initialText;
-
-    dawuiElement = _spanElement;
+    final span = SpanElement();
+    span.style.width = "100%";
+    span.style.height = "100%";
+    for (final child in children) {
+      final childElement = child.asHtmlElement();
+      childElement.style.position = "absolute";
+      span.children.add(childElement);
+    }
+    dawuiElement = span;
     return this;
   }
 }
