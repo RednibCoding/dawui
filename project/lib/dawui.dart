@@ -28,6 +28,7 @@ export 'src/core/widget.dart';
 
 export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment;
 
+export 'src/widgets/scaffold.dart';
 export 'src/widgets/container.dart';
 export 'src/widgets/center.dart';
 export 'src/widgets/align.dart';

@@ -9,10 +9,10 @@ class MainApp extends Widget {
 
   @override
   Widget build() {
-    return Column(children: [
+    return Scaffold(children: [
       Container(
         width: "100%",
-        height: "75%",
+        height: "100%",
         child: Center(
           child: Container(
               width: "150px",
@@ -25,7 +25,7 @@ class MainApp extends Widget {
       ),
       Container(
         width: "100%",
-        height: "25%",
+        height: "350px",
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Image("./assets/logo.png", width: "300px", height: "150px"),
