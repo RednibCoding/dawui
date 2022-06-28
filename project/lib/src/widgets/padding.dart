@@ -6,7 +6,7 @@ class Padding extends Widget {
   final Widget child;
   final EdgeInsets padding;
 
-  Padding.all({required this.padding, required this.child});
+  Padding({required this.padding, required this.child});
 
   @override
   Widget build() {
