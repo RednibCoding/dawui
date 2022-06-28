@@ -80,12 +80,12 @@ class EdgeInsets {
         rightValue = horizontal,
         bottomValue = vertical;
 
-  EdgeInsets.fromLTRB({
-    String left = "0px",
-    String top = "0px",
-    String right = "0px",
-    String bottom = "0px",
-  })  : leftValue = left,
+  EdgeInsets.fromLTRB(
+    String left,
+    String top,
+    String right,
+    String bottom,
+  )   : leftValue = left,
         topValue = top,
         rightValue = right,
         bottomValue = bottom;
