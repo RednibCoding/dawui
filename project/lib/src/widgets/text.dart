@@ -27,13 +27,14 @@ import 'package:dawui/dawui.dart';
 class Text extends Widget {
   String _initialText = "";
   SpanElement? _spanElement;
+  TextStyle? style;
 
   String get value => _spanElement?.text ?? "";
   set value(String value) {
     _spanElement?.text = value;
   }
 
-  Text(String text) {
+  Text(String text, {this.style}) {
     _initialText = text;
   }
 
@@ -42,7 +43,83 @@ class Text extends Widget {
     _spanElement = SpanElement();
     _spanElement!.text = _initialText;
 
+    _applyStyle();
+    _applyShadow();
+
     dawuiElement = _spanElement;
     return this;
   }
+
+  void _applyShadow() {
+    if (style != null) {
+      if (style!.shadow != null) {
+        _spanElement!.style.textShadow = "${style!.shadow!.offsetX} ${style!.shadow!.offsetY} ${style!.shadow!.blurRadius} ${style!.shadow!.color}";
+      }
+    }
+  }
+
+  void _applyStyle() {
+    if (style != null) {
+      if (style!.fontFamily.isNotEmpty) {
+        _spanElement!.style.fontFamily = style!.fontFamily;
+      }
+      if (style!.fontSize.isNotEmpty) {
+        _spanElement!.style.fontSize = style!.fontSize;
+      }
+      _spanElement!.style.fontStyle = style!.fontStyle.name;
+      final fontWeightStr = style!.fontWeight.name.startsWith("w") ? style!.fontWeight.name.substring(1) : style!.fontWeight.name;
+      _spanElement!.style.fontWeight = fontWeightStr;
+
+      if (style!.color.isNotEmpty) {
+        _spanElement!.style.color = style!.color;
+      }
+    }
+  }
+}
+
+class TextStyle {
+  String fontFamily;
+  String fontSize;
+  FontWeight fontWeight;
+  FontStyle fontStyle;
+  String color;
+  TextShadow? shadow;
+  TextStyle({this.fontFamily = "", this.fontSize = "", this.color = "", this.fontWeight = FontWeight.normal, this.fontStyle = FontStyle.normal, this.shadow});
+}
+
+class TextShadow {
+  String color;
+  String offsetX;
+  String offsetY;
+  String blurRadius;
+  TextShadow({required this.offsetX, required this.offsetY, this.blurRadius = "0px", this.color = "#000000"});
+}
+
+enum TextAlign {
+  left,
+  right,
+  center,
+}
+
+enum FontWeight {
+  normal,
+  bold,
+  lighter,
+  bolder,
+  w100,
+  w200,
+  w300,
+  w400,
+  w500,
+  w600,
+  w700,
+  w800,
+  w900,
+  inherit,
+}
+
+enum FontStyle {
+  normal,
+  italic,
+  inherit,
 }
