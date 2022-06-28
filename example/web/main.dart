@@ -11,8 +11,11 @@ class MainApp extends Widget {
   @override
   Widget build() {
     return Stack(children: [
-      Row(children: [ColoredButton(child: Text("Hello 1")), ColoredButton(child: Text("Hello 2"))]),
-      Row(children: [ColoredButton(child: Text("I am ontop"))]),
+      Image("./assets/logoo.png", width: "20%", height: "10%", onPressed: (sender) => (print((sender as Image).source))),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        ColoredButton(child: Text("Hello 1")),
+        ColoredButton(child: Text("Hello 2")),
+      ]),
     ]);
   }
 }
