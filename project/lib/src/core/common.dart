@@ -49,6 +49,48 @@ enum Alignment {
   bottomRight,
 }
 
+class EdgeInsets {
+  final String leftValue;
+  final String topValue;
+  final String rightValue;
+  final String bottomValue;
+
+  EdgeInsets.all(
+    String value,
+  )   : leftValue = value,
+        topValue = value,
+        rightValue = value,
+        bottomValue = value;
+
+  EdgeInsets.only({
+    String left = "0px",
+    String top = "0px",
+    String right = "0px",
+    String bottom = "0px",
+  })  : leftValue = left,
+        topValue = top,
+        rightValue = right,
+        bottomValue = bottom;
+
+  EdgeInsets.symmetric({
+    String horizontal = "0px",
+    String vertical = "0px",
+  })  : leftValue = horizontal,
+        topValue = vertical,
+        rightValue = horizontal,
+        bottomValue = vertical;
+
+  EdgeInsets.fromLTRB({
+    String left = "0px",
+    String top = "0px",
+    String right = "0px",
+    String bottom = "0px",
+  })  : leftValue = left,
+        topValue = top,
+        rightValue = right,
+        bottomValue = bottom;
+}
+
 String crossAxisAlignmentToString(CrossAxisAlignment alignment) {
   switch (alignment) {
     case CrossAxisAlignment.start:

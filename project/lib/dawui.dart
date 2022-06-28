@@ -26,7 +26,7 @@ export 'src/core/router.dart';
 export 'src/core/observable.dart';
 export 'src/core/widget.dart';
 
-export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment;
+export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment, EdgeInsets;
 
 export 'src/widgets/scaffold.dart';
 export 'src/widgets/container.dart';
@@ -49,3 +49,4 @@ export 'src/widgets/slider.dart';
 export 'src/widgets/stack.dart';
 export 'src/widgets/image.dart';
 export 'src/widgets/single_child_scroll_view.dart';
+export 'src/widgets/padding.dart';
