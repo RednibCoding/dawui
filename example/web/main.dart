@@ -5,26 +5,13 @@ void main() {
 }
 
 class MainApp extends Widget {
+  final opacity = Observable("0.5");
+
   @override
   Widget build() {
-    return Stack(children: [
-      Image("./assets/logo.png", width: "100%", height: "20%", onPressed: (sender) => (print((sender as Image).source))),
-      Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          ColoredButton(child: Text("Hello 1")),
-          ColoredButton(child: Text("Hello 2")),
-        ]),
-        Text(
-          "Dawui is awesome!",
-          style: TextStyle(
-            fontSize: "20px",
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold,
-            color: "#9B69FF",
-            shadow: TextShadow(offsetX: "1px", offsetY: "1px"),
-          ),
-        ),
-      ]),
-    ]);
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Image("./assets/logo.png", width: "300px", height: "150px"),
+    );
   }
 }

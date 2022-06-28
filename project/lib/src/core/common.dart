@@ -37,6 +37,18 @@ enum CrossAxisAlignment {
   baseline,
 }
 
+enum Alignment {
+  topLeft,
+  topCenter,
+  topRight,
+  centerLeft,
+  center,
+  centerRight,
+  bottomLeft,
+  bottomCenter,
+  bottomRight,
+}
+
 String crossAxisAlignmentToString(CrossAxisAlignment alignment) {
   switch (alignment) {
     case CrossAxisAlignment.start:

@@ -35,13 +35,16 @@ class Observable<T> {
     final subs = {..._subscriptions};
     for (final sub in subs) {
       if (sub.widget.dawuiElement == null) {
+        print("removing subscription from widget with null dawuiElement (this should never happen)");
         _subscriptions.remove(sub);
         continue;
       }
       if (sub.widget.dawuiElement!.isConnected != true) {
+        print("removing subscription from widget with disconnected element");
         _subscriptions.remove(sub);
         continue;
       }
+
       final newElement = sub.builder(value).asHtmlElement();
       sub.widget.dawuiElement!.replaceWith(newElement);
       sub.widget.dawuiElement = newElement;

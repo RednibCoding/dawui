@@ -26,11 +26,12 @@ export 'src/core/router.dart';
 export 'src/core/observable.dart';
 export 'src/core/widget.dart';
 
-export 'src/core/common.dart' show MainAxisAlignment, CrossAxisAlignment;
+export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment;
 
 export 'src/widgets/scaffold.dart';
 export 'src/widgets/container.dart';
 export 'src/widgets/center.dart';
+export 'src/widgets/align.dart';
 export 'src/widgets/sizedbox.dart';
 export 'src/widgets/flexible.dart';
 export 'src/widgets/button.dart';
