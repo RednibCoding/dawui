@@ -31,16 +31,16 @@ class Stack extends Widget {
 
   @override
   Widget build() {
-    final span = SpanElement();
-    span.style.overflow = "hidden";
-    span.style.width = "100%";
-    span.style.height = "100%";
+    final div = DivElement();
+    div.style.overflow = "hidden";
+    div.style.width = "100%";
+    div.style.height = "100%";
     for (final child in children) {
       final childElement = child.asHtmlElement();
       childElement.style.position = "absolute";
-      span.children.add(childElement);
+      div.children.add(childElement);
     }
-    dawuiElement = span;
+    dawuiElement = div;
     return this;
   }
 }
