@@ -11,9 +11,6 @@ class Padding extends Widget {
   @override
   Widget build() {
     final div = DivElement();
-    div.style.width = "100%";
-    div.style.height = "100%";
-    div.style.display = "flex";
     div.style.padding = "${padding.topValue} ${padding.rightValue} ${padding.bottomValue} ${padding.leftValue}";
 
     div.children.add(child.asHtmlElement());
