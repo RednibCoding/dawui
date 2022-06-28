@@ -32,6 +32,7 @@ class Flexible extends Widget {
   @override
   Widget build() {
     final span = SpanElement();
+    span.style.overflow = "hidden";
     span.style.flexGrow = "$flex";
     span.children.add(child.asHtmlElement());
 

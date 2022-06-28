@@ -35,6 +35,7 @@ class Column extends Widget {
   @override
   Widget build() {
     final span = SpanElement();
+    span.style.overflow = "hidden";
     span.style.height = "100%";
     span.style.width = "100%";
     span.style.display = "flex";

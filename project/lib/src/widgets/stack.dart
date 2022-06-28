@@ -32,6 +32,7 @@ class Stack extends Widget {
   @override
   Widget build() {
     final span = SpanElement();
+    span.style.overflow = "hidden";
     span.style.width = "100%";
     span.style.height = "100%";
     for (final child in children) {

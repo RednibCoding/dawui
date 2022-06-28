@@ -1,7 +1,5 @@
 import 'dart:html';
 
-import 'package:dawui/src/core/common.dart';
-
 import '../../dawui.dart';
 
 class Align extends Widget {
@@ -13,6 +11,7 @@ class Align extends Widget {
   @override
   Widget build() {
     final div = DivElement();
+    div.style.overflow = "hidden";
     div.style.width = "100%";
     div.style.height = "100%";
     div.style.display = "flex";

@@ -28,7 +28,6 @@ export 'src/core/widget.dart';
 
 export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment;
 
-export 'src/widgets/scaffold.dart';
 export 'src/widgets/container.dart';
 export 'src/widgets/center.dart';
 export 'src/widgets/align.dart';
@@ -48,3 +47,4 @@ export 'src/widgets/loading_indicator.dart';
 export 'src/widgets/slider.dart';
 export 'src/widgets/stack.dart';
 export 'src/widgets/image.dart';
+export 'src/widgets/single_child_scroll_view.dart';

@@ -33,6 +33,7 @@ class SizedBox extends Widget {
   @override
   Widget build() {
     final div = DivElement();
+    div.style.overflow = "hidden";
     if (width != "") {
       div.style.width = width;
     }

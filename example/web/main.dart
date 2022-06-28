@@ -13,7 +13,15 @@ class MainApp extends Widget {
       Container(
         width: "100%",
         height: "75%",
-        child: Text("Hello World"),
+        child: Center(
+          child: Container(
+              width: "150px",
+              height: "150px",
+              child: SingleChildScrollView(
+                child: Text(
+                    "You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box."),
+              )),
+        ),
       ),
       Container(
         width: "100%",
