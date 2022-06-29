@@ -28,7 +28,12 @@ class SizedBox extends Widget {
   final String width;
   final String height;
   final Widget? child;
-  SizedBox({this.width = "", this.height = "", this.child});
+  final String? backgroundColor;
+  final String? borderRadius;
+  final String? border;
+  final String? borderColor;
+  final BoxShadow? shadow;
+  SizedBox({this.width = "", this.height = "", this.child, this.backgroundColor, this.borderRadius, this.border, this.shadow, this.borderColor});
 
   @override
   Widget build() {
@@ -40,6 +45,24 @@ class SizedBox extends Widget {
     if (height != "") {
       div.style.height = height;
     }
+
+    if (backgroundColor != null) {
+      div.style.backgroundColor = backgroundColor;
+    }
+
+    if (borderRadius != null) {
+      div.style.borderRadius = borderRadius!;
+    }
+
+    if (border != null && borderColor != null) {
+      div.style.border = "${border!} solid ${borderColor!}";
+    }
+
+    if (shadow != null) {
+      div.style.boxShadow =
+          "${shadow!.offsetX} ${shadow!.offsetY} ${shadow!.blurRadius} ${shadow!.spreadRadius} ${shadow!.color} ${shadow!.inset ? "inset" : ""}";
+    }
+
     if (child != null) {
       div.children.add(child!.asHtmlElement());
     }

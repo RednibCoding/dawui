@@ -90,6 +90,17 @@ class EdgeInsets {
         bottomValue = bottom;
 }
 
+class BoxShadow {
+  String color;
+  String offsetX;
+  String offsetY;
+  String blurRadius;
+  String spreadRadius;
+  bool inset;
+
+  BoxShadow({this.offsetX = "0px", this.offsetY = "0px", this.blurRadius = "0px", this.spreadRadius = "0px", this.color = "#000000", this.inset = false});
+}
+
 String crossAxisAlignmentToString(CrossAxisAlignment alignment) {
   switch (alignment) {
     case CrossAxisAlignment.start:

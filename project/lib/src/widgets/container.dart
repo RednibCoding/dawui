@@ -24,15 +24,31 @@ import 'dart:html';
 
 import 'package:dawui/dawui.dart';
 
+import '../core/common.dart';
+
 class Container extends Widget {
   final String? width;
   final String? height;
   final Widget child;
   final String? backgroundColor;
+  final String? borderRadius;
+  final String? border;
+  final String? borderColor;
+  final BoxShadow? shadow;
   final EdgeInsets? padding;
   final Alignment? alignment;
 
-  Container({this.width, this.height, this.backgroundColor, this.padding, this.alignment, required this.child});
+  Container(
+      {this.width,
+      this.height,
+      this.backgroundColor,
+      this.borderRadius,
+      this.border,
+      this.borderColor,
+      this.shadow,
+      this.padding,
+      this.alignment,
+      required this.child});
 
   @override
   Widget build() {
@@ -52,6 +68,19 @@ class Container extends Widget {
 
     if (backgroundColor != null) {
       div.style.backgroundColor = backgroundColor;
+    }
+
+    if (borderRadius != null) {
+      div.style.borderRadius = borderRadius!;
+    }
+
+    if (border != null && borderColor != null) {
+      div.style.border = "${border!} solid ${borderColor!}";
+    }
+
+    if (shadow != null) {
+      div.style.boxShadow =
+          "${shadow!.offsetX} ${shadow!.offsetY} ${shadow!.blurRadius} ${shadow!.spreadRadius} ${shadow!.color} ${shadow!.inset ? "inset" : ""}";
     }
 
     switch (alignment) {
