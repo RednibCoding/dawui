@@ -26,34 +26,36 @@ import 'package:dawui/dawui.dart';
 
 class Text extends Widget {
   String _initialText = "";
-  SpanElement? _spanElement;
   TextStyle? style;
+  dynamic _containerElement;
+  // By default browsers style a paragraph with a margin at the bottom, usually 16px;
+  bool isParagraph;
 
-  String get value => _spanElement?.text ?? "";
+  String get value => _containerElement?.text ?? "";
   set value(String value) {
-    _spanElement?.text = value;
+    _containerElement?.text = value;
   }
 
-  Text(String text, {this.style}) {
+  Text(String text, {this.style, this.isParagraph = true}) {
     _initialText = text;
   }
 
   @override
   Widget build() {
-    _spanElement = SpanElement();
-    _spanElement!.text = _initialText;
+    _containerElement = isParagraph ? ParagraphElement() : SpanElement();
+    _containerElement!.text = _initialText;
 
     _applyStyle();
     _applyShadow();
 
-    dawuiElement = _spanElement;
+    dawuiElement = _containerElement;
     return this;
   }
 
   void _applyShadow() {
     if (style != null) {
       if (style!.shadow != null) {
-        _spanElement!.style.textShadow = "${style!.shadow!.offsetX} ${style!.shadow!.offsetY} ${style!.shadow!.blurRadius} ${style!.shadow!.color}";
+        _containerElement!.style.textShadow = "${style!.shadow!.offsetX} ${style!.shadow!.offsetY} ${style!.shadow!.blurRadius} ${style!.shadow!.color}";
       }
     }
   }
@@ -61,17 +63,18 @@ class Text extends Widget {
   void _applyStyle() {
     if (style != null) {
       if (style!.fontFamily.isNotEmpty) {
-        _spanElement!.style.fontFamily = style!.fontFamily;
+        _containerElement!.style.fontFamily = style!.fontFamily;
       }
       if (style!.fontSize.isNotEmpty) {
-        _spanElement!.style.fontSize = style!.fontSize;
+        _containerElement!.style.fontSize = style!.fontSize;
+        _containerElement!.style.lineHeight = style!.fontSize;
       }
-      _spanElement!.style.fontStyle = style!.fontStyle.name;
+      _containerElement!.style.fontStyle = style!.fontStyle.name;
       final fontWeightStr = style!.fontWeight.name.startsWith("w") ? style!.fontWeight.name.substring(1) : style!.fontWeight.name;
-      _spanElement!.style.fontWeight = fontWeightStr;
+      _containerElement!.style.fontWeight = fontWeightStr;
 
       if (style!.color.isNotEmpty) {
-        _spanElement!.style.color = style!.color;
+        _containerElement!.style.color = style!.color;
       }
     }
   }

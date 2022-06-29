@@ -12,7 +12,6 @@ class Scaffold extends Widget {
   Widget build() {
     final div = DivElement();
     div.style.width = "100%";
-    div.style.height = "100%";
 
     if (backgroundColor != null) {
       div.style.backgroundColor = backgroundColor;
