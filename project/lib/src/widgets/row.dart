@@ -38,6 +38,7 @@ class Row extends Widget {
     final span = SpanElement();
     span.style.overflow = "hidden";
     span.style.width = "100%";
+    span.style.height = "inherit";
     span.style.display = "flex";
     span.style.flexWrap = "nowrap";
     span.style.flexDirection = reverse ? "row-reverse" : "row";

@@ -25,24 +25,77 @@ import 'dart:html';
 import 'package:dawui/dawui.dart';
 
 class Container extends Widget {
-  final String width;
-  final String height;
-  final Widget? child;
-  Container({this.width = "", this.height = "", this.child});
+  final String? width;
+  final String? height;
+  final Widget child;
+  final String? backgroundColor;
+  final EdgeInsets? padding;
+  final Alignment? alignment;
+
+  Container({this.width, this.height, this.backgroundColor, this.padding, this.alignment, required this.child});
 
   @override
   Widget build() {
     final div = DivElement();
     div.style.overflow = "hidden";
-    if (width != "") {
+
+    if (padding != null) {
+      div.style.padding = "${padding!.topValue} ${padding!.rightValue} ${padding!.bottomValue} ${padding!.leftValue}";
+    }
+
+    if (width != null) {
       div.style.width = width;
     }
-    if (height != "") {
+    if (height != null) {
       div.style.height = height;
     }
-    if (child != null) {
-      div.children.add(child!.asHtmlElement());
+
+    if (backgroundColor != null) {
+      div.style.backgroundColor = backgroundColor;
     }
+
+    switch (alignment) {
+      case null:
+        break;
+      case Alignment.topLeft:
+        div.style.alignItems = "flex-start";
+        div.style.justifyContent = "flex-start";
+        break;
+      case Alignment.topCenter:
+        div.style.justifyContent = "center";
+        div.style.alignItems = "flex-start";
+        break;
+      case Alignment.topRight:
+        div.style.justifyContent = "end";
+        div.style.alignItems = "flex-start";
+        break;
+      case Alignment.centerLeft:
+        div.style.justifyContent = "flex-start";
+        div.style.alignItems = "center";
+        break;
+      case Alignment.center:
+        div.style.justifyContent = "center";
+        div.style.alignItems = "center";
+        break;
+      case Alignment.centerRight:
+        div.style.justifyContent = "flex-end";
+        div.style.alignItems = "center";
+        break;
+      case Alignment.bottomLeft:
+        div.style.justifyContent = "flex-start";
+        div.style.alignItems = "flex-end";
+        break;
+      case Alignment.bottomCenter:
+        div.style.justifyContent = "center";
+        div.style.alignItems = "flex-end";
+        break;
+      case Alignment.bottomRight:
+        div.style.justifyContent = "flex-end";
+        div.style.alignItems = "flex-end";
+        break;
+    }
+
+    div.children.add(child.asHtmlElement());
 
     dawuiElement = div;
     return this;

@@ -34,7 +34,6 @@ enum CrossAxisAlignment {
   end,
   center,
   stretch,
-  baseline,
 }
 
 enum Alignment {
@@ -101,8 +100,6 @@ String crossAxisAlignmentToString(CrossAxisAlignment alignment) {
       return "center";
     case CrossAxisAlignment.stretch:
       return "stretch";
-    case CrossAxisAlignment.baseline:
-      return "baseline";
   }
 }
 
