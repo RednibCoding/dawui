@@ -65,10 +65,10 @@ class Text extends Widget {
       if (style!.fontFamily.isNotEmpty) {
         _containerElement!.style.fontFamily = style!.fontFamily;
       }
-      if (style!.fontSize.isNotEmpty) {
-        _containerElement!.style.fontSize = style!.fontSize;
-        _containerElement!.style.lineHeight = style!.fontSize;
-      }
+
+      _containerElement!.style.fontSize = "${style!.fontSize.toString()}px";
+      _containerElement!.style.lineHeight = "${(style!.fontSize * 1.2).toString()}px";
+
       _containerElement!.style.fontStyle = style!.fontStyle.name;
       final fontWeightStr = style!.fontWeight.name.startsWith("w") ? style!.fontWeight.name.substring(1) : style!.fontWeight.name;
       _containerElement!.style.fontWeight = fontWeightStr;
@@ -82,12 +82,12 @@ class Text extends Widget {
 
 class TextStyle {
   String fontFamily;
-  String fontSize;
+  int fontSize;
   FontWeight fontWeight;
   FontStyle fontStyle;
   String color;
   TextShadow? shadow;
-  TextStyle({this.fontFamily = "", this.fontSize = "", this.color = "", this.fontWeight = FontWeight.normal, this.fontStyle = FontStyle.normal, this.shadow});
+  TextStyle({this.fontFamily = "", this.fontSize = 18, this.color = "", this.fontWeight = FontWeight.normal, this.fontStyle = FontStyle.normal, this.shadow});
 }
 
 class TextShadow {

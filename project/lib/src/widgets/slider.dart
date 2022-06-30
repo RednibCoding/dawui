@@ -2,14 +2,12 @@ import 'dart:html';
 
 import 'package:dawui/dawui.dart';
 
-import '../core/mdl.dart';
-
 class Slider extends Widget {
   final String min;
   final String max;
   final String step;
   final String width;
-  String _value;
+  final String _value;
   InputElement? _inputElement;
   String get value => _inputElement?.value ?? _value;
   Function(String)? onChange;
