@@ -16,6 +16,8 @@ class SingleChildScrollView extends Widget {
     div.style.height = "100%";
     div.style.overflowX = horizontal ? "auto" : "hidden";
     div.style.overflowY = vertical ? "auto" : "hidden";
+    div.setAttribute("overscroll-behavior", "contain");
+
     div.children.add(child.asHtmlElement());
 
     dawuiElement = div;
