@@ -1,7 +1,6 @@
 import 'dart:html';
 
 import '../core/helper.dart';
-import '../core/mdl.dart';
 import '../core/widget.dart';
 
 class TabBar extends Widget {
@@ -43,8 +42,6 @@ class TabBar extends Widget {
         ..id = tabPanel._internalId
         ..style.display = "none");
     }
-
-    convertToMdlComponent(mainTabContainer);
 
     dawuiElement = mainTabContainer;
     return this;

@@ -21,54 +21,41 @@
 // SOFTWARE.
 
 import 'dart:html';
-import '../core/mdl.dart';
 import '../core/widget.dart';
 
-class ColoredActionButton extends _Button {
-  ColoredActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class FlatButton extends _Button {
+  FlatButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored",
+          className: "dawui-button",
         );
 }
 
-class ActionButton extends _Button {
-  ActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class PrimaryButton extends _Button {
+  PrimaryButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect",
+          className: "dawui-button dawui-button--raised dawui-button--primary",
         );
 }
 
-class RaisedButton extends _Button {
-  RaisedButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class SecondaryButton extends _Button {
+  SecondaryButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect",
-        );
-}
-
-class ColoredButton extends _Button {
-  ColoredButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
-      : super(
-          child: child,
-          width: width,
-          height: height,
-          onPressed: onPressed,
-          disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect",
+          className: "dawui-button dawui-button--raised dawui-button--secondary",
         );
 }
 
@@ -80,67 +67,55 @@ class AccentButton extends _Button {
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",
+          className: "dawui-button dawui-button--raised dawui-button--accent",
         );
 }
 
-class FlatButton extends _Button {
-  FlatButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class FlatActionButton extends _Button {
+  FlatActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-js-ripple-effect",
+          className: "dawui-button dawui-button--action",
         );
 }
 
-class ColoredFlatButton extends _Button {
-  ColoredFlatButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class PrimaryActionButton extends _Button {
+  PrimaryActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect",
+          className: "dawui-button dawui-button--primary dawui-button--action",
         );
 }
 
-class AccentFlatButton extends _Button {
-  AccentFlatButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class SecondaryActionButton extends _Button {
+  SecondaryActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--accent mdl-js-ripple-effect",
+          className: "dawui-button dawui-button--secondary dawui-button--action",
         );
 }
 
-class MiniActionButton extends _Button {
-  MiniActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class AccentActionButton extends _Button {
+  AccentActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect",
-        );
-}
-
-class ColoredMiniActionButton extends _Button {
-  ColoredMiniActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
-      : super(
-          child: child,
-          width: width,
-          height: height,
-          onPressed: onPressed,
-          disabled: disabled,
-          className: "mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect",
+          className: "dawui-button dawui-button--accent dawui-button--action",
         );
 }
 
@@ -195,7 +170,7 @@ class _Button extends Widget {
     _buttonElement!.onClick.listen((event) {
       onPressed?.call(this);
     });
-    convertToMdlComponent(_buttonElement!);
+
     _spanElement!.children.add(_buttonElement!);
 
     dawuiElement = _spanElement!;

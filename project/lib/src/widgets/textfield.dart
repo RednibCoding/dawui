@@ -23,7 +23,6 @@
 import 'dart:html';
 
 import '../core/helper.dart';
-import '../core/mdl.dart';
 import '../core/widget.dart';
 
 enum TextFieldType {
@@ -129,8 +128,6 @@ class _TextField extends Widget {
     if (span != null) {
       div.children.add(span);
     }
-
-    convertToMdlComponent(div);
 
     dawuiElement = div;
     return this;

@@ -1,7 +1,7 @@
 import 'package:dawui/dawui.dart';
 
 void main() {
-  runApp((Map<String, String> args) => MainApp());
+  buildApp((Map<String, String> args) => MainApp());
 }
 
 class MainApp extends Widget {
@@ -9,41 +9,30 @@ class MainApp extends Widget {
 
   @override
   Widget build() {
-    return Center(
-      vertical: false,
-      child: SizedBox(
-        width: "100%",
-        height: "100%",
-        child: Stack(
-          children: [
-            TabView(
-              tabViewItems: [
-                TabViewItem(
-                  isActive: true,
-                  title: Text("Startseite"),
-                  body: Text("Startseite"),
-                ),
-                TabViewItem(
-                  title: Text("Inhalt"),
-                  body: Text("Inhalt"),
-                ),
-                TabViewItem(
-                  title: Text("Leserprobe"),
-                  body: Text("Leserprobe"),
-                ),
-                TabViewItem(
-                  title: Text("Kaufen"),
-                  body: Text("Kaufen"),
-                ),
-                TabViewItem(
-                  title: Text("Autor"),
-                  body: Text("Autor"),
-                ),
-              ],
+    return Column(
+      children: [
+        FlatButton(
+          child: Text("Flat Button"),
+          onPressed: (_) => Dialog.show(
+            Container(
+              borderRadius: "10px",
+              width: "400px",
+              height: "300px",
+              backgroundColor: "white",
+              child: Center(
+                child: Text("Hello World!"),
+              ),
             ),
-          ],
+          ),
         ),
-      ),
+        PrimaryButton(child: Text("Primary Button")),
+        SecondaryButton(child: Text("Secondary Button")),
+        AccentButton(child: Text("Accent Button")),
+        FlatActionButton(child: Text("FAB")),
+        PrimaryActionButton(child: Text("PAB")),
+        SecondaryActionButton(child: Text("SAB")),
+        AccentActionButton(child: Text("AAB")),
+      ],
     );
   }
 }

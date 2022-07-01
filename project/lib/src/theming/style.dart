@@ -22,32 +22,34 @@
 
 import 'dart:html';
 
-import 'observable.dart';
-import 'widget.dart';
+import 'package:dawui/src/theming/style.static.css.dart';
 
-class Router extends Widget {
-  final Widget Function(String) routeBuilder;
-  late final Observable<String> currentRoute;
+import 'style.dynamic.css.dart';
+import 'theme.dart';
 
-  Router({
-    required this.routeBuilder,
-    String? initialRoute,
-  }) : currentRoute = Observable<String>(initialRoute ?? window.location.hash.replaceFirst('#', '')) {
-    window.onHashChange.listen(_onHashChangeListener);
-  }
+late StyleElement dawuiStyle;
 
-  void _onHashChangeListener(_) {
-    final route = window.location.hash.replaceFirst("#", "");
-    if (route != currentRoute.value) push(route);
-  }
+void initStyle(Theme? theme) {
+  // Add meta viewport tag to the document so mobile devices will render correctly.
+  final meta = MetaElement();
+  meta.name = "viewport";
+  meta.content = "width=device-width, initial-scale=1.0";
+  document.head?.append(meta);
 
-  void push(String route) => currentRoute.value = route;
+  // Append css
+  dawuiStyle = StyleElement();
+  dawuiCssDynamic = _applyTheme(dawuiCssDynamic, theme);
+  dawuiStyle.innerText = dawuiCssDynamic;
+  final staticCss = StyleElement();
+  staticCss.innerText = dawuiCssStatic;
+  document.head?.append(dawuiStyle);
+  document.head?.append(staticCss);
+}
 
-  @override
-  Widget build() {
-    window.location.hash = currentRoute.value;
-    return currentRoute.observe(
-      (currentRoute) => routeBuilder(currentRoute),
-    );
-  }
+String _applyTheme(String css, Theme? theme) {
+  final th = theme ?? Theme();
+  css = css.replaceFirst("?btnColorPrimary?", th.btnColorPrimary);
+  css = css.replaceFirst("?btnColorSecondary?", th.btnColorSecondary);
+  css = css.replaceFirst("?btnColorAccent?", th.btnColorAccent);
+  return css;
 }

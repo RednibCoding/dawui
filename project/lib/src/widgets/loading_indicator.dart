@@ -1,7 +1,6 @@
 import 'dart:html';
 
 import 'package:dawui/dawui.dart';
-import 'package:dawui/src/core/mdl.dart';
 
 class LoadingIndicator extends Widget {
   final bool isSpinner;
@@ -27,8 +26,6 @@ class LoadingIndicator extends Widget {
       div.className = "mdl-progress mdl-js-progress mdl-progress__indeterminate";
       div.style.width = width.isNotEmpty ? width : "250px";
     }
-
-    convertToMdlComponent(div);
 
     dawuiElement = div;
     return this;

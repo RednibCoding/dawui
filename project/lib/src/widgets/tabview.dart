@@ -1,7 +1,6 @@
 import 'dart:html';
 
 import '../core/helper.dart';
-import '../core/mdl.dart';
 import '../core/widget.dart';
 
 class TabView extends Widget {
@@ -24,8 +23,6 @@ class TabView extends Widget {
     for (final tabPanels in tabViewItems) {
       mainTabContainer.children.add(tabPanels.asHtmlElement());
     }
-
-    convertToMdlComponent(mainTabContainer);
 
     dawuiElement = mainTabContainer;
     return this;
@@ -52,8 +49,6 @@ class TabViewItem extends Widget {
     div.className = "mdl-tabs__panel ${isActive ? "is-active" : ""}";
     div.id = _internalId;
     div.children.add(body.asHtmlElement());
-
-    convertToMdlComponent(div);
 
     dawuiElement = div;
     return this;

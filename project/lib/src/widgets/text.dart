@@ -36,7 +36,7 @@ class Text extends Widget {
     _containerElement?.text = value;
   }
 
-  Text(String text, {this.style, this.isParagraph = true}) {
+  Text(String text, {this.style, this.isParagraph = false}) {
     _initialText = text;
   }
 
