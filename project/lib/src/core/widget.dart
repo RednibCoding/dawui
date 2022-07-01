@@ -108,18 +108,13 @@ void runApp(Widget Function(Map<String, String> args) widgetBuilder) {
     root.children = [rootElement];
 
     // Add a placeholder for a modal dialog
-    _appendModalPlaceholderTo(root.children);
-    // Make the root fixed and enable scrolling otherwise the modal dialog open would cause the page to scroll to the top
-    root.style.position = "fixed";
-    root.style.left = "0";
-    root.style.right = "0";
-    root.style.overflowY = "auto";
+    _appendModalPlaceholderTo(root);
   } else {
     throw Exception("Error: Could not build root element.");
   }
 }
 
-void _appendModalPlaceholderTo(List<Element> element) {
+void _appendModalPlaceholderTo(Element element) {
   // The modal container (takes up the whole screen to prevent interaction, outside of the modal)
   modalContainer = document.createElement("div");
   modalContainer.id = "dawui-modal-container";
@@ -164,5 +159,12 @@ void _appendModalPlaceholderTo(List<Element> element) {
     },
   );
 
-  element.add(modalContainer);
+  element.children.add(modalContainer);
+
+  // Make the root fixed and enable scrolling otherwise the modal-dialog-open would cause the page to scroll to the top
+  // when position: fixed would be applied there
+  element.style.position = "fixed";
+  element.style.left = "0";
+  element.style.right = "0";
+  element.style.overflowY = "auto";
 }
