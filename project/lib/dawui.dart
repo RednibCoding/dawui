@@ -26,7 +26,6 @@ export 'src/core/observable.dart';
 export 'src/core/widget.dart';
 export 'src/core/build.dart';
 export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment, EdgeInsets, BoxShadow;
-// export 'src/core/style.dart';
 
 export 'src/theming/theme.dart';
 
