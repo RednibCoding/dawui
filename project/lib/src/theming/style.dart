@@ -22,6 +22,7 @@
 
 import 'dart:html';
 
+import 'package:dawui/src/core/helper.dart';
 import 'package:dawui/src/theming/style.static.css.dart';
 
 import 'style.dynamic.css.dart';
@@ -38,18 +39,18 @@ void initStyle(Theme? theme) {
 
   // Append css
   dawuiStyle = StyleElement();
-  dawuiCssDynamic = _applyTheme(dawuiCssDynamic, theme);
-  dawuiStyle.innerText = dawuiCssDynamic;
+  final cssDynamic = processStyle(dawuiCssDynamic, theme);
+  dawuiStyle.innerText = cssDynamic;
   final staticCss = StyleElement();
   staticCss.innerText = dawuiCssStatic;
   document.head?.append(dawuiStyle);
   document.head?.append(staticCss);
 }
 
-String _applyTheme(String css, Theme? theme) {
+String processStyle(String css, Theme? theme) {
   final th = theme ?? Theme();
-  css = css.replaceFirst("?btnColorPrimary?", th.btnColorPrimary);
-  css = css.replaceFirst("?btnColorSecondary?", th.btnColorSecondary);
-  css = css.replaceFirst("?btnColorAccent?", th.btnColorAccent);
+  css = css.replaceFirst("?btnColorPrimary?", th.btnColorPrimary.startsWith("#") ? hex2rgb(th.btnColorPrimary) : th.btnColorPrimary);
+  css = css.replaceFirst("?btnColorSecondary?", th.btnColorSecondary.startsWith("#") ? hex2rgb(th.btnColorSecondary) : th.btnColorSecondary);
+  css = css.replaceFirst("?btnColorAccent?", th.btnColorAccent.startsWith("#") ? hex2rgb(th.btnColorAccent) : th.btnColorAccent);
   return css;
 }

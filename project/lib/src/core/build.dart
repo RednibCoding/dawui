@@ -1,13 +1,15 @@
 import 'dart:html';
 
+import 'package:dawui/src/theming/theme.dart';
+
 import '../theming/style.dart';
 import '../widgets/dialog.dart';
 import 'widget.dart';
 
 /// Creates a new app and appends it to the body element.
 /// The [args] contain all attributes of the HTML element.
-void buildApp(Widget Function(Map<String, String> args) widgetBuilder) {
-  initStyle(null);
+void buildApp(Widget Function(Map<String, String> args) widgetBuilder, {Theme? theme}) {
+  initStyle(theme);
 
   final appId = "dawui-app";
   var target = document.createElement("div");

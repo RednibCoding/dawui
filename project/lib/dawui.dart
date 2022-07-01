@@ -25,9 +25,10 @@ library dawui;
 export 'src/core/observable.dart';
 export 'src/core/widget.dart';
 export 'src/core/build.dart';
+export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment, EdgeInsets, BoxShadow;
 // export 'src/core/style.dart';
 
-export 'src/core/common.dart' show Alignment, MainAxisAlignment, CrossAxisAlignment, EdgeInsets, BoxShadow;
+export 'src/theming/theme.dart';
 
 export 'src/widgets/dialog.dart';
 export 'src/widgets/scaffold.dart';

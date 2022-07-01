@@ -1,8 +1,10 @@
 import 'package:dawui/dawui.dart';
 
 void main() {
-  buildApp((Map<String, String> args) => MainApp());
+  buildApp((Map<String, String> args) => MainApp(), theme: Theme());
 }
+
+final blaTheme = Theme(btnColorSecondary: "#123456");
 
 class MainApp extends Widget {
   final opacity = Observable("0.5");
@@ -25,7 +27,10 @@ class MainApp extends Widget {
             ),
           ),
         ),
-        PrimaryButton(child: Text("Primary Button")),
+        PrimaryButton(
+          child: Text("Primary Button"),
+          onPressed: (_) => {blaTheme.apply()},
+        ),
         SecondaryButton(child: Text("Secondary Button")),
         AccentButton(child: Text("Accent Button")),
         FlatActionButton(child: Text("FAB")),
