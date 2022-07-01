@@ -1,12 +1,10 @@
 # dawui
-Lighweight web ui framework for dart inspired by flutter
+A lightweight web ui framework for Dart inspired by flutter
 
 # Goal
-Dawui should be a lighweight web ui framework simliar to Flutter.
+Dawui is meant to be a lightweight web ui framework that feels familiar to Flutter developers.
 
-For creating websites, Flutter is quite overkill for such task.
-
-Therefore i thought, wouldn't it be nice, to just have a small and lightweigt web ui framework that feels like Flutter and behaves similar to Flutter.
+Sometimes Flutter can be overkill for creating websites, therefore i thought, wouldn't it be nice, to just have a small and lightweigt web ui framework that feels like Flutter and behaves similar to Flutter.
 
 And with that idea in mind, i started working on Dawui (`Da`rt `W`eb `ui`).
 
@@ -15,9 +13,10 @@ Dawui should mimik Flutter in areas where it makes sense, when it doesn't make s
 Dawui comes with a simple state management system: you define an Observable and bind it to a Widget. When ever you change the Observable's value, this widget gets redrawn. This differs from Flutter where you have to override the `setState` Method of a StatefullWidget. Since Dawui does not distinguish betwenn Widgets with state and without state, you can make your statefull values (Observables) change the Widget. This is alot more flexible since you can basically trigger a redraw from everywhere.
 
 # Road
-First step to have a starting point, is to implement all the Elements that are available in [mdl](https://getmdl.io/components/index.html#dialog-section)
+At first, all the mayor layout widgets should be implemented, such as Row, Column, Container, SizedBox etc. 
+Then, basic widgets should be implemented. The [mdl](https://getmdl.io/components/index.html#dialog-section) components are a good reference for what might be useful at the beginning. 
 
-A Flutter like Theming should be implementd.
+After that, a proper way of theming should be implemented. Inspired by the way Flutter does it. 
 
 ## Example
 ```dart
