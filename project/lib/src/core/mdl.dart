@@ -110,19 +110,6 @@ String mdlCSS() {
         background: #C6CBE9;
     }
 
-    ::-webkit-scrollbar-track {
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      border-radius: 8px;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
     input[type=range]::-moz-range-track {
         width: 300px;
         height: 4px;
