@@ -61,7 +61,6 @@ const String dawuiCssStatic = """
   position: relative;
   height: 36px;
   margin: 0;
-  min-width: 64px;
   padding: 0 16px;
   display: inline-block;
   font-size: 14px;
@@ -178,7 +177,6 @@ input.dawui-button[type="submit"] {
   font-size: 24px;
   height: 56px;
   margin: auto;
-  min-width: 56px;
   width: 56px;
   padding: 0;
   overflow: hidden;
