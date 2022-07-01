@@ -8,6 +8,8 @@ import 'widget.dart';
 
 /// Creates a new app and appends it to the body element.
 /// The [args] contain all attributes of the HTML element.
+/// [widgetBuilder] is a function that returns the root widget of the app.
+/// The [theme] is the theme to apply to the application.
 void buildApp(Widget Function(Map<String, String> args) widgetBuilder, {Theme? theme}) {
   initStyle(theme);
 
