@@ -39,6 +39,7 @@ export 'src/widgets/flexible.dart';
 export 'src/widgets/button.dart';
 export 'src/widgets/text.dart';
 export 'src/widgets/textfield.dart';
+export 'src/widgets/textarea.dart';
 export 'src/widgets/row.dart';
 export 'src/widgets/column.dart';
 export 'src/widgets/wrap.dart';

@@ -25,9 +25,15 @@ import 'dart:html';
 import 'style.dart';
 import 'style.dynamic.css.dart';
 
+// Button
 const _fallbackBtnColorPrimary = "#3F51B5";
 const _fallbackBtnColorSecondary = "#46B6AC";
 const _fallbackBtnColorAccent = "#FF4081";
+
+// TextField
+const _fallbackTextFieldBorderColor = "#3F51B5";
+// TextArea
+const _fallbackTextAreaBorderColor = "#3F51B5";
 
 /// Theming class for the application.
 /// Themes can be created and applied to the application.
@@ -35,11 +41,15 @@ class Theme {
   final String btnColorPrimary;
   final String btnColorSecondary;
   final String btnColorAccent;
+  final String textFieldBorderColor;
+  final String textAreaBorderColor;
 
   Theme({
     this.btnColorPrimary = _fallbackBtnColorPrimary,
     this.btnColorSecondary = _fallbackBtnColorSecondary,
     this.btnColorAccent = _fallbackBtnColorAccent,
+    this.textFieldBorderColor = _fallbackTextFieldBorderColor,
+    this.textAreaBorderColor = _fallbackTextAreaBorderColor,
   });
 
   /// Applies the theme to the application.

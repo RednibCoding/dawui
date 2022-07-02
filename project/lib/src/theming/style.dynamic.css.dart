@@ -25,5 +25,7 @@ const String dawuiCssDynamic = """
   --btn-color-primary: ?btnColorPrimary?;
   --btn-color-secondary: ?btnColorSecondary?;
   --btn-color-accent: ?btnColorAccent?;
+  --textfield-border-color: ?textFieldBorderColor?;
+  --textarea-border-color: ?textAreaBorderColor?;
 }
 """;

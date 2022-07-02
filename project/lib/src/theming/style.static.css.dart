@@ -48,6 +48,113 @@ const String dawuiCssStatic = """
   box-shadow: 0 9px 46px 8px rgb(0 0 0 / 14%), 0 11px 15px -7px rgb(0 0 0 / 12%), 0 24px 38px 3px rgb(0 0 0 / 20%);
 }
 
+/****************************************************************************/
+/* TEXTFIELD                                                                */
+/****************************************************************************/
+
+.dawui-textfield {
+  border: none;
+  outline: none;
+  position: relative;
+  border-bottom: 1px solid rgba(0,0,0, 0.1);
+  font-size: 16px;
+  display: inline-block;
+  box-sizing: border-box;
+  display: block;
+  font-size: 16px;
+  font-family: "Helvetica", "Arial", sans-serif;
+  margin: 0;
+  background: none;
+  text-align: left;
+  color: inherit;
+  width: 300px;
+  max-width: 100%;
+  min-width: 32px;
+  width: auto;
+  min-height: 32px;
+}
+
+.dawui-textfield:focus:not(:active){
+    border-bottom: 1px solid rgba(var(--textfield-border-color), 0.5);
+}
+
+.dawui-textfield[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.dawui-textfield[type="number"]::-webkit-inner-spin-button, .dawui-textfield[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.dawui-textfield:disabled {
+  background-color: transparent;
+  border-bottom: 1px dotted rgba(0,0,0, 0.12);
+  color: rgba(0,0,0, 0.26);
+}
+
+.dawui-textfield:disabled::placeholder {
+  color: rgba(0,0,0, 0.26);
+  opacity: 1; /* Firefox */
+}
+
+.dawui-textfield:disabled:-ms-input-placeholder {
+  color: rgba(0,0,0, 0.26);
+}
+
+.dawui-textfield:disabled::-ms-input-placeholder:disabled {
+  color: rgba(0,0,0, 0.26);
+}
+
+.dawui-textfield[type="number"] {
+  -moz-appearance: textfield;
+}
+.dawui-textfield[type="number"]::-webkit-inner-spin-button, .dawui-textfield[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/****************************************************************************/
+/* TEXTAREA                                                                 */
+/****************************************************************************/
+
+.dawui-textarea {
+  border: 1px solid rgba(0,0,0, 0.1);
+  border-radius: 4px;
+  outline: none;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  display: block;
+  font-size: 16px;
+  font-family: "Helvetica", "Arial", sans-serif;
+  margin: 0;
+  background: none;
+  text-align: left;
+  color: inherit;
+  width: 300px;
+  max-width: 100%;
+  min-width: 64px;
+  width: auto;
+  min-height: 64px;
+}
+
+.dawui-textarea:disabled {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  color: rgba(0,0,0, 0.26);
+}
+
+.dawui-textarea[readOnly] {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  color: rgba(0,0,0, 0.70);
+}
+
+.dawui-textarea:focus:not(:active){
+    border: 1px solid rgba(var(--textarea-border-color), 0.5);
+}
+
 
 /****************************************************************************/
 /* BUTTONS                                                                  */
@@ -77,7 +184,7 @@ const String dawuiCssStatic = """
   vertical-align: middle;
 }
 
-.dawui-button[disabled][disabled], .dawui-button.dawui-button--disabled.dawui-button--disabled {
+.dawui-button:disabled {
   color: rgba(0,0,0, 0.26);
   cursor: default;
   background-color: transparent;

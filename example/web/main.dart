@@ -13,30 +13,20 @@ class MainApp extends Widget {
   Widget build() {
     return Column(
       children: [
-        FlatButton(
-          child: Text("Flat Button"),
-          onPressed: (_) => Dialog.show(
-            Container(
-              borderRadius: "10px",
-              width: "400px",
-              height: "300px",
-              backgroundColor: "white",
-              child: Center(
-                child: Text("Hello World!"),
-              ),
-            ),
-          ),
+        TextArea(
+          value: "Hello World",
+          width: "200px",
+          height: "200px",
+          resize: TextareaResize.none,
+          maxLength: 4,
+          // autofocus: true,
         ),
-        PrimaryButton(
-          child: Text("Primary Button"),
-          onPressed: (_) => {blaTheme.apply()},
+        SizedBox(height: "10px"),
+        TextField(
+          value: "Hello World",
+          maxLength: 4,
+          autofocus: true,
         ),
-        SecondaryButton(child: Text("Secondary Button")),
-        AccentButton(child: Text("Accent Button")),
-        FlatActionButton(child: Text("FAB")),
-        PrimaryActionButton(child: Text("PAB")),
-        SecondaryActionButton(child: Text("SAB")),
-        AccentActionButton(child: Text("AAB")),
       ],
     );
   }
