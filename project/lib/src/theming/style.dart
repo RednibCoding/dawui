@@ -22,6 +22,7 @@
 
 import 'dart:html';
 
+import 'package:dawui/src/core/dependencies/dependency_loader.dart';
 import 'package:dawui/src/core/helper.dart';
 import 'package:dawui/src/theming/style.static.css.dart';
 
@@ -38,13 +39,8 @@ void initStyle(Theme? theme) {
   document.head?.append(meta);
 
   // Append css
-  dawuiStyle = StyleElement();
-  final cssDynamic = processStyle(dawuiCssDynamic, theme);
-  dawuiStyle.innerText = cssDynamic;
-  final staticCss = StyleElement();
-  staticCss.innerText = dawuiCssStatic;
-  document.head?.append(dawuiStyle);
-  document.head?.append(staticCss);
+  DependencyLoader.loadCss(processStyle(dawuiCssDynamic, theme));
+  DependencyLoader.loadCss(dawuiCssStatic);
 }
 
 String processStyle(String css, Theme? theme) {
