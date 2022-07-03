@@ -28,5 +28,6 @@ const String dawuiCssDynamic = r"""
   --textfield-border-color: ?textFieldBorderColor?;
   --textarea-border-color: ?textAreaBorderColor?;
   --tabview-border-color: ?tabviewBorderColor?;
+  --tabview-active-border-color: ?tabviewActiveBorderColor?;
 }
 """;

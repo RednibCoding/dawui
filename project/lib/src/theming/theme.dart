@@ -35,7 +35,8 @@ const _fallbackTextFieldBorderColor = "#3F51B5";
 // TextArea
 const _fallbackTextAreaBorderColor = "#3F51B5";
 // TabView
-const _fallbacktabviewBorderColor = "#3F51B5";
+const _fallbackTabviewBorderColor = "#3F51B5";
+const _fallbackTabviewActiveBorderColor = "#E0E0E0";
 
 /// Theming class for the application.
 /// Themes can be created and applied to the application.
@@ -46,6 +47,7 @@ class Theme {
   final String textFieldBorderColor;
   final String textAreaBorderColor;
   final String tabviewBorderColor;
+  final String tabviewActiveBorderColor;
 
   Theme({
     this.btnColorPrimary = _fallbackBtnColorPrimary,
@@ -53,7 +55,8 @@ class Theme {
     this.btnColorAccent = _fallbackBtnColorAccent,
     this.textFieldBorderColor = _fallbackTextFieldBorderColor,
     this.textAreaBorderColor = _fallbackTextAreaBorderColor,
-    this.tabviewBorderColor = _fallbacktabviewBorderColor,
+    this.tabviewBorderColor = _fallbackTabviewBorderColor,
+    this.tabviewActiveBorderColor = _fallbackTabviewActiveBorderColor,
   });
 
   /// Applies the theme to the application.

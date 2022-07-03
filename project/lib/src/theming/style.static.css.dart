@@ -184,7 +184,7 @@ const String dawuiCssStatic = r"""
   height: 48px;
   padding: 0 0 0 0;
   margin: 0;
-  border-bottom: 1px solid rgb(224,224,224);
+  border-bottom: 2px solid rgba(var(--tabview-active-border-color), 0.5);
 }
 
 .dawui-tabs__tab-head {
@@ -206,7 +206,7 @@ const String dawuiCssStatic = r"""
 }
 
 .dawui-tabs__tab-head--active {
-  border-bottom: 1px solid rgba(var(--tabview-border-color), 0.5);
+  border-bottom: 2px solid rgba(var(--tabview-border-color), 0.5);
 }
 
 .dawui-tabs__tab-content {
