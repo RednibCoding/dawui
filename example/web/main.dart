@@ -14,7 +14,7 @@ class MainApp extends Widget {
     return Column(
       children: [
         CodeArea(
-          language: SourceLanguage.dart,
+          language: CodeAreaLanguage.dart,
           width: "350px",
           height: "200px",
           code: r'''final opacity = Observable("""0.5""");''',
