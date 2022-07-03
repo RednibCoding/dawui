@@ -54,36 +54,28 @@ class Text extends Widget {
 
   void _applyStyle() {
     if (style != null) {
-      var styleClass = "text-style${makeUid()}";
-      var styleBuffer = StringBuffer();
-      styleBuffer.write(".$styleClass {\n");
-
       if (style!.fontFamily.isNotEmpty) {
-        styleBuffer.write("  font-family: ${style!.fontFamily};\n");
+        _textContainerElement!.style.fontFamily = style!.fontFamily;
       }
 
-      styleBuffer.write("  font-size: ${style!.fontSize}px;\n");
+      _textContainerElement!.style.fontSize = "${style!.fontSize}px";
 
-      styleBuffer.write("  line-height: ${(style!.fontSize * 1.2).toString()}px;\n");
+      _textContainerElement!.style.lineHeight = "${(style!.fontSize * 1.2).toString()}px";
 
-      styleBuffer.write("  font-style: ${style!.fontStyle.name};\n");
+      _textContainerElement!.style.fontStyle = style!.fontStyle.name;
 
       final fontWeightStr = style!.fontWeight.name.startsWith("w") ? style!.fontWeight.name.substring(1) : style!.fontWeight.name;
-      styleBuffer.write("  font-weight: $fontWeightStr;\n");
+      _textContainerElement!.style.fontWeight = fontWeightStr;
 
       if (style!.color.isNotEmpty) {
         final color = style!.color.startsWith("#") ? hex2rgb(style!.color) : style!.color;
-        styleBuffer.write("  color: rgb($color);\n");
+        _textContainerElement!.style.color = "rgb($color)";
       }
 
       if (style!.shadow != null) {
         final shadowColor = style!.shadow!.color.startsWith("#") ? hex2rgb(style!.shadow!.color) : style!.shadow!.color;
-        styleBuffer.write("  text-shadow: ${style!.shadow!.offsetX} ${style!.shadow!.offsetY} ${style!.shadow!.blurRadius} rgb($shadowColor);\n");
+        _textContainerElement!.style.textShadow = "${style!.shadow!.offsetX} ${style!.shadow!.offsetY} ${style!.shadow!.blurRadius} rgb($shadowColor)";
       }
-
-      document.head?.children.add(StyleElement()..text = styleBuffer.toString());
-
-      _textContainerElement!.classes.add(styleClass);
     }
   }
 }
@@ -95,6 +87,7 @@ class TextStyle {
   FontStyle fontStyle;
   String color;
   TextShadow? shadow;
+  bool alphaInherit = true;
   TextStyle({this.fontFamily = "", this.fontSize = 18, this.color = "", this.fontWeight = FontWeight.normal, this.fontStyle = FontStyle.normal, this.shadow});
 }
 
