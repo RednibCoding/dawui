@@ -23,17 +23,18 @@
 import 'dart:html';
 
 import 'package:dawui/dawui.dart';
+import 'package:dawui/src/core/helper.dart';
 
 class Text extends Widget {
   String _initialText = "";
   TextStyle? style;
-  dynamic _containerElement;
+  dynamic _textContainerElement;
   // By default browsers style a paragraph with a margin at the bottom, usually 16px;
   bool isParagraph;
 
-  String get value => _containerElement?.text ?? "";
+  String get value => _textContainerElement?.text ?? "";
   set value(String value) {
-    _containerElement?.text = value;
+    _textContainerElement?.text = value;
   }
 
   Text(String text, {this.style, this.isParagraph = false}) {
@@ -42,40 +43,47 @@ class Text extends Widget {
 
   @override
   Widget build() {
-    _containerElement = isParagraph ? ParagraphElement() : SpanElement();
-    _containerElement!.text = _initialText;
+    _textContainerElement = isParagraph ? ParagraphElement() : SpanElement();
+    _textContainerElement!.text = _initialText;
 
     _applyStyle();
-    _applyShadow();
 
-    dawuiElement = _containerElement;
+    dawuiElement = _textContainerElement;
     return this;
-  }
-
-  void _applyShadow() {
-    if (style != null) {
-      if (style!.shadow != null) {
-        _containerElement!.style.textShadow = "${style!.shadow!.offsetX} ${style!.shadow!.offsetY} ${style!.shadow!.blurRadius} ${style!.shadow!.color}";
-      }
-    }
   }
 
   void _applyStyle() {
     if (style != null) {
+      var styleClass = "text-style${makeUid()}";
+      var styleBuffer = StringBuffer();
+      styleBuffer.write(".$styleClass {\n");
+
       if (style!.fontFamily.isNotEmpty) {
-        _containerElement!.style.fontFamily = style!.fontFamily;
+        styleBuffer.write("  font-family: ${style!.fontFamily};\n");
       }
 
-      _containerElement!.style.fontSize = "${style!.fontSize.toString()}px";
-      _containerElement!.style.lineHeight = "${(style!.fontSize * 1.2).toString()}px";
+      styleBuffer.write("  font-size: ${style!.fontSize}px;\n");
 
-      _containerElement!.style.fontStyle = style!.fontStyle.name;
+      styleBuffer.write("  line-height: ${(style!.fontSize * 1.2).toString()}px;\n");
+
+      styleBuffer.write("  font-style: ${style!.fontStyle.name};\n");
+
       final fontWeightStr = style!.fontWeight.name.startsWith("w") ? style!.fontWeight.name.substring(1) : style!.fontWeight.name;
-      _containerElement!.style.fontWeight = fontWeightStr;
+      styleBuffer.write("  font-weight: $fontWeightStr;\n");
 
       if (style!.color.isNotEmpty) {
-        _containerElement!.style.color = style!.color;
+        final color = style!.color.startsWith("#") ? hex2rgb(style!.color) : style!.color;
+        styleBuffer.write("  color: rgb($color);\n");
       }
+
+      if (style!.shadow != null) {
+        final shadowColor = style!.shadow!.color.startsWith("#") ? hex2rgb(style!.shadow!.color) : style!.shadow!.color;
+        styleBuffer.write("  text-shadow: ${style!.shadow!.offsetX} ${style!.shadow!.offsetY} ${style!.shadow!.blurRadius} rgb($shadowColor);\n");
+      }
+
+      document.head?.children.add(StyleElement()..text = styleBuffer.toString());
+
+      _textContainerElement!.classes.add(styleClass);
     }
   }
 }

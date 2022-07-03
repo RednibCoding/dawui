@@ -184,7 +184,7 @@ const String dawuiCssStatic = r"""
   height: 48px;
   padding: 0 0 0 0;
   margin: 0;
-  border-bottom: 2px solid rgba(var(--tabview-active-border-color), 0.5);
+  border-bottom: 2px solid rgb(var(--tabview-active-border-color), 0.5);
 }
 
 .dawui-tabs__tab-head {
@@ -200,13 +200,20 @@ const String dawuiCssStatic = r"""
   text-align: center;
   font-weight: 500;
   font-size: 14px;
-  color: rgba(0,0,0, 0.54);
+  /* color: rgba(0,0,0, 0.54); */
+  background-color: transparent;
   overflow: hidden;
   cursor: pointer;
 }
 
+.dawui-tabs__tab-head:hover {
+  /* color: rgba(0,0,0, 1); */
+  background-color: rgba(158,158,158, 0.20);
+}
+
 .dawui-tabs__tab-head--active {
-  border-bottom: 2px solid rgba(var(--tabview-border-color), 0.5);
+  /* color: rgba(0,0,0, 1); */
+  border-bottom: 2px solid rgb(var(--tabview-border-color));
 }
 
 .dawui-tabs__tab-content {
