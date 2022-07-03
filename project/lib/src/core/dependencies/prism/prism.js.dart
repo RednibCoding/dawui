@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names, unnecessary_string_escapes
+// ignore_for_file: constant_identifier_names, unnecessary_string_escapes, non_constant_identifier_names
 
 final String prism_js = r"""
 /* PrismJS 1.28.0
