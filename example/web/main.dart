@@ -14,10 +14,26 @@ class MainApp extends Widget {
     return Column(
       children: [
         CodeArea(
-          language: CodeAreaLanguage.dart,
-          width: "350px",
-          height: "200px",
-          code: r'''final opacity = Observable("""0.5""");''',
+          language: CodeAreaLanguage.html,
+          width: "90%",
+          height: "500px",
+          code: r'''
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk">
+    <title>dawui_example</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="main.dart.js"></script>
+</head>
+
+<body>
+</body>
+</html>''',
         ),
       ],
     );

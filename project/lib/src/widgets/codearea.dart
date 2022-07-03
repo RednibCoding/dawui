@@ -15,7 +15,7 @@ class CodeArea extends Widget {
 
   String get code => _codeElement.innerText ?? "";
   set code(String value) {
-    _codeElement.innerText = value;
+    _codeElement.innerHtml = _code?.replaceAll("&", "&amp").replaceAll("<", "&lt") ?? "";
   }
 
   CodeArea({
@@ -33,7 +33,7 @@ class CodeArea extends Widget {
     _codeElement = document.createElement("code");
     _codeElement.className = "language-${language.toString().split('.').last}";
     if (_code != null) {
-      _codeElement.innerText = _code;
+      _codeElement.innerHtml = _code?.replaceAll("&", "&amp").replaceAll("<", "&lt") ?? "";
     }
     if (_width != null) {
       preElement.style.width = _width;
