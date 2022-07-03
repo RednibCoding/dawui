@@ -22,28 +22,45 @@
 
 import 'dart:html';
 
-import '../core/helper.dart';
 import '../core/widget.dart';
 
 class TabView extends Widget {
+  final void Function(Widget sender)? onPressed;
   final List<TabViewItem> tabViewItems;
 
-  TabView({required this.tabViewItems});
+  TabView({required this.tabViewItems, this.onPressed});
 
   @override
   Widget build() {
     final mainTabContainer = DivElement();
-    mainTabContainer.className = "mdl-tabs mdl-js-tabs mdl-js-ripple-effect";
+    mainTabContainer.className = "dawui-tabs";
     final tabbar = DivElement();
-    tabbar.className = "mdl-tabs__tab-bar";
+    tabbar.className = "dawui-tabs__tab-bar";
     for (final tab in tabViewItems) {
+      tab._tabHead.onClick.listen((_) {
+        for (final t in tabViewItems) {
+          t._tabHead.classes.remove("dawui-tabs__tab-head--active");
+          t._tabContent.classes.remove("dawui-tabs__tab-content--active");
+          t._tabContent.classes.add("dawui-tabs__tab-content");
+          t._clicked = false;
+        }
+        tab._tabHead.classes.add("dawui-tabs__tab-head--active");
+        tab._tabContent.classes.remove("dawui-tabs__tab-content");
+        tab._tabContent.classes.add("dawui-tabs__tab-content--active");
+        tab._clicked = true;
+      });
       tabbar.children.add(tab._tabHead);
     }
 
+    tabbar.onClick.listen((_) {
+      final clickedTab = tabViewItems.firstWhere((t) => t._clicked);
+      onPressed?.call(clickedTab);
+    });
+
     mainTabContainer.children.add(tabbar);
 
-    for (final tabPanels in tabViewItems) {
-      mainTabContainer.children.add(tabPanels.asHtmlElement());
+    for (final tabContent in tabViewItems) {
+      mainTabContainer.children.add(tabContent.asHtmlElement());
     }
 
     dawuiElement = mainTabContainer;
@@ -55,24 +72,29 @@ class TabViewItem extends Widget {
   final Widget title;
   final Widget body;
   final bool isActive;
-  final String _internalId;
+  final void Function(Widget sender)? onPressed;
   final Element _tabHead;
-  TabViewItem({required this.title, required this.body, this.isActive = false})
-      : _internalId = makeUid(),
-        _tabHead = document.createElement("a") {
-    _tabHead.className = "mdl-tabs__tab ${isActive ? "is-active" : ""}";
-    _tabHead.setAttribute("href", "#$_internalId");
+  late final Element _tabContent;
+  bool _clicked = false;
+
+  TabViewItem({required this.title, required this.body, this.isActive = false, this.onPressed}) : _tabHead = document.createElement("a") {
+    _tabHead.classes.add("dawui-tabs__tab-head");
+    if (isActive) {
+      _tabHead.classes.add("dawui-tabs__tab-head--active");
+    }
+    _tabHead.onClick.listen((_) {
+      onPressed?.call(this);
+    });
     _tabHead.children.add(title.asHtmlElement());
   }
 
   @override
   Widget build() {
-    final div = DivElement();
-    div.className = "mdl-tabs__panel ${isActive ? "is-active" : ""}";
-    div.id = _internalId;
-    div.children.add(body.asHtmlElement());
+    _tabContent = DivElement();
+    _tabContent.className = "dawui-tabs__tab-content${isActive ? "--active" : ""}";
+    _tabContent.children.add(body.asHtmlElement());
 
-    dawuiElement = div;
+    dawuiElement = _tabContent;
     return this;
   }
 }

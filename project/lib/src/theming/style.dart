@@ -50,5 +50,6 @@ String processStyle(String css, Theme? theme) {
   css = css.replaceFirst("?btnColorAccent?", th.btnColorAccent.startsWith("#") ? hex2rgb(th.btnColorAccent) : th.btnColorAccent);
   css = css.replaceFirst("?textFieldBorderColor?", th.textFieldBorderColor.startsWith("#") ? hex2rgb(th.textFieldBorderColor) : th.textFieldBorderColor);
   css = css.replaceFirst("?textAreaBorderColor?", th.textAreaBorderColor.startsWith("#") ? hex2rgb(th.textAreaBorderColor) : th.textAreaBorderColor);
+  css = css.replaceFirst("?tabviewBorderColor?", th.textAreaBorderColor.startsWith("#") ? hex2rgb(th.textAreaBorderColor) : th.textAreaBorderColor);
   return css;
 }

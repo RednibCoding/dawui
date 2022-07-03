@@ -157,6 +157,67 @@ const String dawuiCssStatic = r"""
 
 
 /****************************************************************************/
+/* TABBAR                                                                   */
+/****************************************************************************/
+
+.dawui-tabs {
+  display: block;
+  width: 100%;
+}
+
+.dawui-tabs__tab-bar {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-content: space-between;
+      -ms-flex-line-pack: justify;
+          align-content: space-between;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 48px;
+  padding: 0 0 0 0;
+  margin: 0;
+  border-bottom: 1px solid rgb(224,224,224);
+}
+
+.dawui-tabs__tab-head {
+  margin: 0;
+  border: none;
+  padding: 0 24px 0 24px;
+  float: left;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(0,0,0, 0.54);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.dawui-tabs__tab-head--active {
+  border-bottom: 1px solid rgba(var(--tabview-border-color), 0.5);
+}
+
+.dawui-tabs__tab-content {
+  display: none;
+}
+
+.dawui-tabs__tab-content--active {
+  display: block;
+}
+
+/****************************************************************************/
 /* BUTTONS                                                                  */
 /****************************************************************************/
 
