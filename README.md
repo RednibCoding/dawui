@@ -1,4 +1,5 @@
-# dawui
+![logo.png](./readme/dawui-logo-color.png)
+# Dawui
 A lightweight web ui framework for Dart inspired by flutter
 
 # Goal
