@@ -57,7 +57,7 @@ class CodeArea extends Widget {
     return this;
   }
 
-  // TODO: this does not work because it needs to rebuild the widget in order for prism generate the tokens for highlighting
+  // TODO: this does not work because it needs to rebuild the widget in order for prism to re-generate the tokens for highlighting
   void setLanguage(CodeAreaLanguage language) {
     _language = language;
     dawuiElement?.className = "language-${_language.toString().split('.').last}";
