@@ -28,7 +28,7 @@ import 'package:dawui/src/theming/theme.dart';
 
 import '../theming/style.dart';
 import '../widgets/dialog.dart';
-import 'dependencies/prism/prism.css.dart';
+import 'dependencies/prism/prism.default.css.dart';
 import 'widget.dart';
 
 /// Creates a new app and appends it to the body element.
@@ -37,7 +37,7 @@ import 'widget.dart';
 /// The [theme] is the theme to apply to the application.
 void buildApp(Widget Function(Map<String, String> args) widgetBuilder, {Theme? theme}) {
   initStyle(theme);
-  DependencyLoader.loadCss(prism_css);
+  DependencyLoader.loadCss(prism_default_css);
   DependencyLoader.loadJs(prism_js);
 
   final appId = "dawui-app";

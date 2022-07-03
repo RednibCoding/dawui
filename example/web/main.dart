@@ -9,15 +9,10 @@ final blaTheme = Theme(btnColorSecondary: "#123456");
 class MainApp extends Widget {
   final opacity = Observable("0.5");
 
-  @override
-  Widget build() {
-    return Column(
-      children: [
-        CodeArea(
-          language: CodeAreaLanguage.html,
-          width: "90%",
-          height: "500px",
-          code: r'''
+  final codeArea = CodeArea(
+    language: CodeAreaLanguage.dart,
+    width: "90%",
+    code: r'''
 <!DOCTYPE html>
 
 <html>
@@ -34,7 +29,33 @@ class MainApp extends Widget {
 <body>
 </body>
 </html>''',
+  );
+
+  @override
+  Widget build() {
+    return Column(
+      children: [
+        PrimaryButton(
+          child: Text("Default"),
+          onPressed: (_) => CodeArea.setTheme(CodeAreaTheme.normal),
         ),
+        PrimaryButton(
+          child: Text("Dark"),
+          onPressed: (_) => CodeArea.setTheme(CodeAreaTheme.dark),
+        ),
+        PrimaryButton(
+          child: Text("Solarized Light"),
+          onPressed: (_) => CodeArea.setTheme(CodeAreaTheme.soarizedLight),
+        ),
+        PrimaryButton(
+          child: Text("Tomorrow Night"),
+          onPressed: (_) => CodeArea.setTheme(CodeAreaTheme.tomorrowNight),
+        ),
+        PrimaryButton(
+          child: Text("Language html"),
+          onPressed: (_) => codeArea.setLanguage(CodeAreaLanguage.html),
+        ),
+        codeArea,
       ],
     );
   }
