@@ -6,6 +6,7 @@ import '../core/widget.dart';
 
 class CodeArea extends Widget {
   CodeAreaLanguage language;
+  // ignore: prefer_typing_uninitialized_variables
   late final _codeElement;
 
   // Only needed to forward them to the build method
