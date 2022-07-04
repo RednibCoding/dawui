@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import 'dart:html';
+import '../core/dependencies/mdl/mdl_helper.dart';
 import '../core/widget.dart';
 
 class FlatButton extends _Button {
@@ -31,31 +32,19 @@ class FlatButton extends _Button {
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "dawui-button",
+          className: "mdl-button mdl-js-button mdl-js-ripple-effect",
         );
 }
 
-class PrimaryButton extends _Button {
-  PrimaryButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
+class ColoredButton extends _Button {
+  ColoredButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
       : super(
           child: child,
           width: width,
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "dawui-button dawui-button--raised dawui-button--primary",
-        );
-}
-
-class SecondaryButton extends _Button {
-  SecondaryButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
-      : super(
-          child: child,
-          width: width,
-          height: height,
-          onPressed: onPressed,
-          disabled: disabled,
-          className: "dawui-button dawui-button--raised dawui-button--secondary",
+          className: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect",
         );
 }
 
@@ -67,7 +56,7 @@ class AccentButton extends _Button {
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "dawui-button dawui-button--raised dawui-button--accent",
+          className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",
         );
 }
 
@@ -79,31 +68,7 @@ class FlatActionButton extends _Button {
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "dawui-button dawui-button--action",
-        );
-}
-
-class PrimaryActionButton extends _Button {
-  PrimaryActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
-      : super(
-          child: child,
-          width: width,
-          height: height,
-          onPressed: onPressed,
-          disabled: disabled,
-          className: "dawui-button dawui-button--primary dawui-button--action",
-        );
-}
-
-class SecondaryActionButton extends _Button {
-  SecondaryActionButton({required Widget child, void Function(Widget sender)? onPressed, bool disabled = false, String width = "", String height = ""})
-      : super(
-          child: child,
-          width: width,
-          height: height,
-          onPressed: onPressed,
-          disabled: disabled,
-          className: "dawui-button dawui-button--secondary dawui-button--action",
+          className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect",
         );
 }
 
@@ -115,7 +80,7 @@ class AccentActionButton extends _Button {
           height: height,
           onPressed: onPressed,
           disabled: disabled,
-          className: "dawui-button dawui-button--accent dawui-button--action",
+          className: "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent",
         );
 }
 
@@ -170,7 +135,7 @@ class _Button extends Widget {
     _buttonElement!.onClick.listen((event) {
       onPressed?.call(this);
     });
-
+    MdlHelper.convertToMdlComponent(_buttonElement!);
     _spanElement!.children.add(_buttonElement!);
 
     dawuiElement = _spanElement!;

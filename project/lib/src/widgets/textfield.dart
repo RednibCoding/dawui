@@ -22,6 +22,7 @@
 
 import 'dart:html';
 
+import '../core/dependencies/mdl/mdl_helper.dart';
 import '../core/helper.dart';
 import '../core/widget.dart';
 
@@ -41,81 +42,97 @@ enum TextFieldType {
   // color,
 }
 
-class TextField extends Widget {
-  final TextFieldType type;
-  final String label;
-  final int maxLength;
-  void Function(Widget sender)? onChange;
-  late final InputElement _inputElement;
-  final bool autofocus;
-
-  // Only needed to forward the values to the build method.
-  final String _value;
-  final String _width;
-  final bool _disabled;
-  final bool _readOnly;
-
-  String get value => _inputElement.value ?? "";
-  set value(String value) {
-    _inputElement.value = value;
-  }
-
-  bool get readOnly => _inputElement.readOnly ?? false;
-  set readOnly(bool value) {
-    _inputElement.readOnly = value;
-  }
-
-  bool get disabled => _inputElement.disabled ?? false;
-  set disabled(bool value) {
-    _inputElement.disabled = value;
-  }
-
-  bool get hasFocus => document.activeElement == _inputElement;
-  void focus() => _inputElement.focus();
-
+class TextField extends _TextField {
   TextField(
-      {this.type = TextFieldType.text,
-      this.label = "",
-      this.autofocus = false,
+      {TextFieldType type = TextFieldType.text,
+      String label = "",
+      String pattern = "",
+      String errorText = "",
       String width = "",
-      this.maxLength = -1,
-      bool disabled = false,
-      bool readOnly = false,
-      this.onChange,
+      void Function(Widget sender)? onChange,
       String value = ""})
-      : _value = value,
-        _width = width,
-        _disabled = disabled,
-        _readOnly = readOnly;
+      : super(
+          width: width,
+          type: type,
+          label: label,
+          pattern: pattern,
+          errorText: errorText,
+          onChange: onChange,
+          value: value,
+          className: "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
+        );
+}
+
+class _TextField extends Widget {
+  final TextFieldType type;
+  final String className;
+  final String pattern;
+  final String label;
+  final String errorText;
+  final String width;
+  void Function(Widget sender)? onChange;
+  InputElement? _inputElement;
+  String _initialValue = "";
+
+  String get value => _inputElement?.value ?? "";
+  set value(String value) {
+    _inputElement?.value = value;
+  }
+
+  _TextField(
+      {required this.className,
+      required this.type,
+      required this.label,
+      required this.pattern,
+      required this.errorText,
+      required this.width,
+      this.onChange,
+      String value = ""}) {
+    _initialValue = value;
+  }
 
   @override
   Widget build() {
+    final div = DivElement();
+    div.style.width = width;
+    div.className = className;
+
     final inputId = makeUid();
     _inputElement = InputElement();
-    _inputElement.disabled = _disabled;
-    _inputElement.readOnly = _readOnly;
-    _inputElement.style.width = "100%";
-    _inputElement.className = "dawui-textfield";
-    _inputElement.type = type.toString().split('.').last;
-    _inputElement.id = inputId;
-    _inputElement.value = _value;
-    _inputElement.autofocus = autofocus;
-
-    _inputElement.onInput.listen((e) {
+    _inputElement!.style.width = "100%";
+    _inputElement!.className = "mdl-textfield__input";
+    _inputElement!.type = type.toString().split('.').last;
+    _inputElement!.id = inputId;
+    _inputElement!.value = _initialValue;
+    if (pattern != "") {
+      _inputElement!.pattern = pattern;
+    }
+    _inputElement!.onInput.listen((e) {
       onChange?.call(this);
     });
 
-    if (maxLength > -1) {
-      _inputElement.maxLength = maxLength;
+    final label = LabelElement();
+    label.className = "mdl-textfield__label";
+    label.setAttribute("for", inputId);
+    label.text = this.label;
+
+    SpanElement? span;
+    // Only add error text if there is pattern that cannot be matched
+    if (errorText != "" && pattern != "") {
+      span = SpanElement();
+      span.className = "mdl-textfield__error";
+      span.text = errorText;
     }
 
-    if (_width.isNotEmpty) {
-      _inputElement.style.width = _width;
+    div.children.add(_inputElement!);
+    div.children.add(label);
+    if (span != null) {
+      div.children.add(span);
     }
 
-    _inputElement.placeholder = label;
+    MdlHelper.convertToMdlComponent(div);
 
-    dawuiElement = _inputElement;
+    dawuiElement = div;
     return this;
   }
 }

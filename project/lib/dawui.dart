@@ -53,3 +53,4 @@ export 'src/widgets/image.dart';
 export 'src/widgets/single_child_scroll_view.dart';
 export 'src/widgets/padding.dart';
 export 'src/widgets/codearea.dart';
+export 'src/widgets/navbar_scrollable_tabs.dart';

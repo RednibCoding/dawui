@@ -9,27 +9,23 @@ final blaTheme = Theme(btnColorSecondary: "#123456");
 class MainApp extends Widget {
   @override
   Widget build() {
-    return Center(
-      child: Container(
-        width: "500px",
-        child: TabView(
-          tabViewItems: [
-            TabViewItem(
-              title: Text("Tab 1", style: TextStyle(color: "#00FF0C")),
-              body: Text("Tab 1 content"),
-              isActive: true,
-            ),
-            TabViewItem(
-              title: Text("Tab 2"),
-              body: Text("Tab 2 content"),
-            ),
-            TabViewItem(
-              title: Text("Tab 3"),
-              body: Text("Tab 3 content"),
-            ),
-          ],
+    return NavbarScrollableTabs(
+      title: Text("Hello World"),
+      navbarTabItems: [
+        NavbarTabItem(
+          title: Text("Tab 1"),
+          content: Text("Content 1"),
+          isActive: true,
         ),
-      ),
+        NavbarTabItem(
+          title: Text("Tab 2"),
+          content: Text("Content 2"),
+        ),
+        NavbarTabItem(
+          title: Text("Tab 3"),
+          content: Text("Content 3"),
+        ),
+      ],
     );
   }
 }

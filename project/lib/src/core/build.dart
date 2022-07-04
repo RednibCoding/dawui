@@ -28,6 +28,8 @@ import 'package:dawui/src/theming/theme.dart';
 
 import '../theming/style.dart';
 import '../widgets/dialog.dart';
+import 'dependencies/mdl/mdl.css.dart';
+import 'dependencies/mdl/mdl.js.dart';
 import 'dependencies/prism/prism.default.css.dart';
 import 'widget.dart';
 
@@ -36,9 +38,22 @@ import 'widget.dart';
 /// [widgetBuilder] is a function that returns the root widget of the app.
 /// The [theme] is the theme to apply to the application.
 void buildApp(Widget Function(Map<String, String> args) widgetBuilder, {Theme? theme}) {
+  // Add meta viewport tag to the document so mobile devices will render correctly.
+  final meta = MetaElement();
+  meta.name = "viewport";
+  meta.content = "width=device-width, initial-scale=1.0";
+  document.head?.append(meta);
+
+  final materialIcons = LinkElement();
+  materialIcons.rel = "stylesheet";
+  materialIcons.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+  document.head?.append(materialIcons);
+
   initStyle(theme);
   DependencyLoader.loadCss(prism_default_css);
   DependencyLoader.loadJs(prism_js);
+  DependencyLoader.loadCss(mdl_css);
+  DependencyLoader.loadJs(mdl_js);
 
   final appId = "dawui-app";
   var target = document.createElement("div");

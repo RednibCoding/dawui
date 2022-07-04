@@ -26,7 +26,7 @@ import 'package:dawui/src/core/dependencies/dependency_loader.dart';
 import 'package:dawui/src/core/helper.dart';
 import 'package:dawui/src/theming/style.static.css.dart';
 
-import 'style.dynamic.css.dart';
+// import 'style.dynamic.css.dart';
 import 'theme.dart';
 
 late StyleElement dawuiStyle;
@@ -39,7 +39,7 @@ void initStyle(Theme? theme) {
   document.head?.append(meta);
 
   // Append css
-  DependencyLoader.loadCss(processStyle(dawuiCssDynamic, theme));
+  // DependencyLoader.loadCss(processStyle(dawuiCssDynamic, theme));
   DependencyLoader.loadCss(dawuiCssStatic);
 }
 
