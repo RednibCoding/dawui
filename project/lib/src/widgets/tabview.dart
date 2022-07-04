@@ -27,15 +27,16 @@ import '../core/widget.dart';
 class TabView extends Widget {
   final void Function(Widget sender)? onPressed;
   final List<TabViewItem> tabViewItems;
+  final bool showBorder;
 
-  TabView({required this.tabViewItems, this.onPressed});
+  TabView({required this.tabViewItems, this.onPressed, this.showBorder = true});
 
   @override
   Widget build() {
     final mainTabContainer = DivElement();
     mainTabContainer.className = "dawui-tabs";
     final tabbar = DivElement();
-    tabbar.className = "dawui-tabs__tab-bar";
+    tabbar.className = "dawui-tabs__tab-bar ${showBorder ? "tab-bar--show-border" : ""}";
     for (final tab in tabViewItems) {
       tab._tabHead.onClick.listen((_) {
         for (final t in tabViewItems) {

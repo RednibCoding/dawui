@@ -172,9 +172,9 @@ const String dawuiCssStatic = r"""
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: flex-start;
+          justify-content: flex-start;
   -webkit-align-content: space-between;
       -ms-flex-line-pack: justify;
           align-content: space-between;
@@ -184,7 +184,10 @@ const String dawuiCssStatic = r"""
   height: 48px;
   padding: 0 0 0 0;
   margin: 0;
-  border-bottom: 2px solid rgb(var(--tabview-active-border-color), 0.5);
+}
+
+.tab-bar--show-border {
+  border-bottom: 3px solid rgb(var(--tabview-border-color));
 }
 
 .dawui-tabs__tab-head {
@@ -204,6 +207,11 @@ const String dawuiCssStatic = r"""
   background-color: transparent;
   overflow: hidden;
   cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .dawui-tabs__tab-head:hover {
@@ -213,7 +221,8 @@ const String dawuiCssStatic = r"""
 
 .dawui-tabs__tab-head--active {
   /* color: rgba(0,0,0, 1); */
-  border-bottom: 2px solid rgb(var(--tabview-border-color));
+  border-bottom: 3px solid rgb(var(--tabview-active-border-color));
+  background-color: rgba(158,158,158, 0.125);
 }
 
 .dawui-tabs__tab-content {

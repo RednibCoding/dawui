@@ -35,8 +35,8 @@ const _fallbackTextFieldBorderColor = "#3F51B5";
 // TextArea
 const _fallbackTextAreaBorderColor = "#3F51B5";
 // TabView
-const _fallbackTabviewBorderColor = "#3F51B5";
-const _fallbackTabviewActiveBorderColor = "#E0E0E0";
+const _fallbackTabviewBorderColor = "#E0E0E0";
+const _fallbackTabviewActiveBorderColor = "#3F51B5";
 
 /// Theming class for the application.
 /// Themes can be created and applied to the application.
